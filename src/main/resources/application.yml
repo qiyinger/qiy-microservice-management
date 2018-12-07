@@ -1,0 +1,21 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: microservice-management
+  datasource:
+    username: root
+    password: 1997
+    url: jdbc:mysql://106.15.182.191:3306/micro_manage
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+#
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
