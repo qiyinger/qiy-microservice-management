@@ -3,15 +3,15 @@ package swust.qiy.microservice.management.query;
 import lombok.ToString;
 import swust.qiy.microservice.core.enums.QueryEnum;
 import swust.qiy.microservice.core.query.BaseQuery;
-import swust.qiy.microservice.management.entity.Application;
+import swust.qiy.microservice.management.entity.Microservice;
 
 import java.time.LocalDateTime;
 
 /**
  * @author qiying
- * @create 2018/12/6
+ * @create 2018/12/8
  */
-public class ApplicationQuery extends BaseQuery {
+public class MicroserviceQuery extends BaseQuery<Microservice> {
 
     private Integer id;
 
@@ -19,13 +19,27 @@ public class ApplicationQuery extends BaseQuery {
 
     private String name;
 
+    private Integer appId;
+
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
 
-    private Integer systemId;
+    public Integer getId() {
+        return id;
+    }
 
-    private Byte status;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getName() {
         return name;
@@ -35,12 +49,12 @@ public class ApplicationQuery extends BaseQuery {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getAppId() {
+        return appId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAppId(Integer appId) {
+        this.appId = appId;
     }
 
     public LocalDateTime getStartTime() {
@@ -59,48 +73,24 @@ public class ApplicationQuery extends BaseQuery {
         this.endTime = endTime;
     }
 
-    public Integer getSystemId() {
-        return systemId;
-    }
-
-    public void setSystemId(Integer systemId) {
-        this.systemId = systemId;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public enum ApplicationEnum implements QueryEnum<Application> {
+    public enum MicroserviceEnum implements QueryEnum<Microservice> {
         ID("id"),
         CODE("code"),
         NAME("name"),
-        CREATE_TIME("create_time"),
-        SYSTEM_ID("system_id"),
-        STATUS("status"),
+        CREATE_TIME("createTime"),
+        APP_ID("app_id"),
         ;
 
-        private String fieldName;
+        private String field;
 
-        ApplicationEnum(String fieldName) {
-            this.fieldName = fieldName;
+        MicroserviceEnum(String field) {
+            this.field = field;
         }
 
         @Override
         public String getFieldName() {
-            return null;
+            return field;
         }
     }
+
 }

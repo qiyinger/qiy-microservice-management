@@ -9,6 +9,7 @@ import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.management.entity.Application;
 import swust.qiy.microservice.management.query.ApplicationQuery;
 import swust.qiy.microservice.management.service.ApplicationService;
+import swust.qiy.microservice.management.service.MicroserviceService;
 
 /**
  * @author qiying
@@ -23,6 +24,7 @@ public class ApplicationController {
 
     /**
      * 条件查询系统
+     *
      * @param query
      * @return
      */
@@ -41,6 +43,7 @@ public class ApplicationController {
 
     /**
      * 保存一个系统
+     *
      * @param application
      * @return
      */
@@ -61,6 +64,7 @@ public class ApplicationController {
 
     /**
      * 更新系统
+     *
      * @param application
      * @return
      */
@@ -73,15 +77,4 @@ public class ApplicationController {
         return applicationService.update(application);
     }
 
-    /**
-     * 删除
-     * @param ids
-     * @return
-     */
-    @PostMapping(value = "/delete")
-    @ResponseBody
-    public Result delete(@RequestParam String ids) {
-        applicationService.deleteByIds(ids);
-        return new Result().success();
-    }
 }

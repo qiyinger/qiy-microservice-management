@@ -6,8 +6,11 @@ import swust.qiy.microservice.core.enums.ResultCodeEnum;
 import swust.qiy.microservice.core.query.Criteria;
 import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.core.service.impl.BaseServiceImpl;
+import swust.qiy.microservice.management.dao.ApplicationDao;
 import swust.qiy.microservice.management.dao.SystemDao;
+import swust.qiy.microservice.management.entity.Application;
 import swust.qiy.microservice.management.entity.System;
+import swust.qiy.microservice.management.query.ApplicationQuery;
 import swust.qiy.microservice.management.query.SystemQuery;
 import swust.qiy.microservice.management.service.SystemService;
 
@@ -23,6 +26,9 @@ public class SystemServiceImpl extends BaseServiceImpl<System> implements System
 
     @Autowired
     private SystemDao systemDao;
+
+    @Autowired
+    private ApplicationDao applicationDao;
 
     public Result<System> save(System system) {
 
@@ -41,6 +47,17 @@ public class SystemServiceImpl extends BaseServiceImpl<System> implements System
             return new Result<>().fail(ResultCodeEnum.RECORD_EXIST);
         }
         return super.update(system);
+    }
+
+    public Result deleteByIds(String ids) {
+
+        long count = applicationDao.count(new Criteria<Application>()
+                .in(ApplicationQuery.ApplicationEnum.SYSTEM_ID, ids));
+        if (count != 0) {
+            return new Result().fail(ResultCodeEnum.DISABLE_DELETE);
+        }
+        return super.deleteByIds(ids);
+
     }
 
     private boolean isExist(System system) {

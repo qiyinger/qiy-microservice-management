@@ -7,6 +7,7 @@ import swust.qiy.microservice.core.query.Criteria;
 import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.core.service.impl.BaseServiceImpl;
 import swust.qiy.microservice.management.dao.ApplicationDao;
+import swust.qiy.microservice.management.dao.SystemDao;
 import swust.qiy.microservice.management.entity.Application;
 import swust.qiy.microservice.management.query.ApplicationQuery;
 import swust.qiy.microservice.management.service.ApplicationService;
@@ -19,23 +20,28 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Application> impleme
 
     @Autowired
     private ApplicationDao applicationDao;
+    @Autowired
+    private SystemDao systemDao;
 
     public Result<Application> save(Application application) {
-
+        if (!isSystemExist(application.getSystemId())) {
+            return new Result().fail(ResultCodeEnum.RECORD_NOT_EXIST, "系统不存在");
+        }
         if (isExist(application)) {
-            return new Result<>().fail(ResultCodeEnum.RECORD_EXIST);
+            return new Result().fail(ResultCodeEnum.RECORD_EXIST);
         }
         return super.save(application);
-
     }
 
     public Result<Application> update(Application application) {
-
         if (isExist(application)) {
             return new Result<>().fail(ResultCodeEnum.RECORD_EXIST);
         }
         return super.update(application);
+    }
 
+    public boolean isSystemExist(int systemId) {
+        return systemDao.existsById(systemId);
     }
 
     public boolean isExist(Application application) {

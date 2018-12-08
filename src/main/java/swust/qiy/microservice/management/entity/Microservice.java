@@ -1,6 +1,7 @@
 package swust.qiy.microservice.management.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -36,7 +37,7 @@ public class Microservice {
      * 创建时间
      */
     @Column(name = "`CREATE_TIME`")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 描述
@@ -127,7 +128,7 @@ public class Microservice {
      *
      * @return CREATE_TIME - 创建时间
      */
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
@@ -136,7 +137,7 @@ public class Microservice {
      *
      * @param createTime 创建时间
      */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
