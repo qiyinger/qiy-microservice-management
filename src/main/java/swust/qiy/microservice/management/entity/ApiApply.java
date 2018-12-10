@@ -1,6 +1,7 @@
 package swust.qiy.microservice.management.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -30,13 +31,13 @@ public class ApiApply {
      * 申请类型:service(微服务),api(接口)
      */
     @Column(name = "`TYPE`")
-    private String type;
+    private Byte type;
 
     /**
      * 申请时间
      */
     @Column(name = "`APPLY_TIME`")
-    private Date applyTime;
+    private LocalDateTime applyTime;
 
     /**
      * 描述
@@ -55,6 +56,12 @@ public class ApiApply {
      */
     @Column(name = "`AS_ID`")
     private Integer asId;
+
+    /**
+     * 修改时间
+     */
+    @Column(name = "`modify_time`")
+    private LocalDateTime modifyTime;
 
     /**
      * 获取唯一标识
@@ -115,7 +122,7 @@ public class ApiApply {
      *
      * @return TYPE - 申请类型:service(微服务),api(接口)
      */
-    public String getType() {
+    public Byte getType() {
         return type;
     }
 
@@ -124,7 +131,7 @@ public class ApiApply {
      *
      * @param type 申请类型:service(微服务),api(接口)
      */
-    public void setType(String type) {
+    public void setType(Byte type) {
         this.type = type;
     }
 
@@ -133,7 +140,7 @@ public class ApiApply {
      *
      * @return APPLY_TIME - 申请时间
      */
-    public Date getApplyTime() {
+    public LocalDateTime getApplyTime() {
         return applyTime;
     }
 
@@ -142,7 +149,7 @@ public class ApiApply {
      *
      * @param applyTime 申请时间
      */
-    public void setApplyTime(Date applyTime) {
+    public void setApplyTime(LocalDateTime applyTime) {
         this.applyTime = applyTime;
     }
 
@@ -198,5 +205,23 @@ public class ApiApply {
      */
     public void setAsId(Integer asId) {
         this.asId = asId;
+    }
+
+    /**
+     * 获取修改时间
+     *
+     * @return modify_time - 修改时间
+     */
+    public LocalDateTime getModifyTime() {
+        return modifyTime;
+    }
+
+    /**
+     * 设置修改时间
+     *
+     * @param modifyTime 修改时间
+     */
+    public void setModifyTime(LocalDateTime modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

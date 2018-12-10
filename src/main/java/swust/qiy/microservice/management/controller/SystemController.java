@@ -34,6 +34,7 @@ public class SystemController {
 
     /**
      * 条件查询分页列表
+     *
      * @param query
      * @return
      */
@@ -41,17 +42,18 @@ public class SystemController {
     @ResponseBody
     public Result list(@RequestBody SystemQuery query) {
         Criteria<System> criteria = new Criteria<System>()
-                .equal(SystemQuery.SystemEnum.CODE, query.getCode())
-                .like(SystemQuery.SystemEnum.NAME, query.getName())
-                .gte(SystemQuery.SystemEnum.CREATE_TIME, query.getStartTime())
-                .lte(SystemQuery.SystemEnum.CREATE_TIME, query.getEndTime())
-                .equal(SystemQuery.SystemEnum.STATUS, query.getStatus())
-                .equal(SystemQuery.SystemEnum.USER_NAME, query.getUserName());
+                .equal(SystemQuery.Enum.CODE, query.getCode())
+                .like(SystemQuery.Enum.NAME, query.getName())
+                .gte(SystemQuery.Enum.CREATE_TIME, query.getStartTime())
+                .lte(SystemQuery.Enum.CREATE_TIME, query.getEndTime())
+                .equal(SystemQuery.Enum.STATUS, query.getStatus())
+                .equal(SystemQuery.Enum.USER_NAME, query.getUserName());
         return systemService.findAll(criteria, query.getPage());
     }
 
     /**
      * 保存系统
+     *
      * @param system
      * @return
      */
@@ -70,6 +72,7 @@ public class SystemController {
 
     /**
      * 更新系统
+     *
      * @param system
      * @return
      */
@@ -84,6 +87,7 @@ public class SystemController {
 
     /**
      * 删除
+     *
      * @param ids
      * @return
      */

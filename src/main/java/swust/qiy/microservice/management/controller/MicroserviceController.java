@@ -31,11 +31,11 @@ public class MicroserviceController {
     @ResponseBody
     public Result list(@RequestBody MicroserviceQuery query) {
         Criteria<Microservice> criteria = new Criteria<Microservice>()
-                .equal(MicroserviceQuery.MicroserviceEnum.CODE, query.getCode())
-                .like(MicroserviceQuery.MicroserviceEnum.NAME, query.getName())
-                .gte(MicroserviceQuery.MicroserviceEnum.CREATE_TIME, query.getStartTime())
-                .lte(MicroserviceQuery.MicroserviceEnum.CREATE_TIME, query.getEndTime())
-                .equal(MicroserviceQuery.MicroserviceEnum.APP_ID, query.getAppId());
+                .equal(MicroserviceQuery.Enum.CODE, query.getCode())
+                .like(MicroserviceQuery.Enum.NAME, query.getName())
+                .gte(MicroserviceQuery.Enum.CREATE_TIME, query.getStartTime())
+                .lte(MicroserviceQuery.Enum.CREATE_TIME, query.getEndTime())
+                .equal(MicroserviceQuery.Enum.APP_ID, query.getAppId());
         return microserviceService.findAll(criteria, query.getPage());
     }
 

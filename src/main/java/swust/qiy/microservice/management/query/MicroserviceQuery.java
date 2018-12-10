@@ -73,7 +73,7 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
         this.endTime = endTime;
     }
 
-    public enum MicroserviceEnum implements QueryEnum<Microservice> {
+    public enum Enum implements QueryEnum<Microservice> {
         ID("id"),
         CODE("code"),
         NAME("name"),
@@ -83,7 +83,7 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
 
         private String field;
 
-        MicroserviceEnum(String field) {
+        Enum(String field) {
             this.field = field;
         }
 

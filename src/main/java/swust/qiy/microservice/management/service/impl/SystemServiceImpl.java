@@ -32,12 +32,12 @@ public class SystemServiceImpl extends BaseServiceImpl<System> implements System
 
     public Result<System> save(System system) {
 
-        system.setStatus(DISABLE);
-        system.setCreateTime(LocalDateTime.now());
-
         if (isExist(system)) {
             return new Result<>().fail(ResultCodeEnum.RECORD_EXIST);
         }
+        system.setCreateTime(LocalDateTime.now());
+        system.setStatus(DISABLE);
+        system.setIsDeleted(false);
         return super.save(system);
     }
 
@@ -52,7 +52,7 @@ public class SystemServiceImpl extends BaseServiceImpl<System> implements System
     public Result deleteByIds(String ids) {
 
         long count = applicationDao.count(new Criteria<Application>()
-                .in(ApplicationQuery.ApplicationEnum.SYSTEM_ID, ids));
+                .in(ApplicationQuery.Enum.SYSTEM_ID, ids));
         if (count != 0) {
             return new Result().fail(ResultCodeEnum.DISABLE_DELETE);
         }
@@ -62,7 +62,7 @@ public class SystemServiceImpl extends BaseServiceImpl<System> implements System
 
     private boolean isExist(System system) {
         long count = systemDao.count(new Criteria<System>()
-                .equal(SystemQuery.SystemEnum.CODE, system.getCode()));
+                .equal(SystemQuery.Enum.CODE, system.getCode()));
         return count != 0;
     }
 

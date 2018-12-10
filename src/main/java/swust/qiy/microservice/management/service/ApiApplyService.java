@@ -7,5 +7,4 @@ import swust.qiy.microservice.management.entity.ApiApply;
  * @author qiying
  */
 public interface ApiApplyService extends BaseService<ApiApply> {
-
 }

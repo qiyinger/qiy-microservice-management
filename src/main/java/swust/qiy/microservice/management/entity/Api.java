@@ -47,7 +47,7 @@ public class Api {
      * 类型:内网Intranet/外网Internet
      */
     @Column(name = "`TYPE`")
-    private String type;
+    private Byte type;
 
     /**
      * 是否发布, 0:未发布, 1:发布
@@ -66,6 +66,36 @@ public class Api {
      */
     @Column(name = "`SERVICE_VERSION_ID`")
     private Integer serviceVersionId;
+
+    /**
+     * 请求头部
+     */
+    @Column(name = "`HEADER`")
+    private String header;
+
+    /**
+     * 请求参数
+     */
+    @Column(name = "`PARAMETERS`")
+    private String parameters;
+
+    /**
+     * 返回信息
+     */
+    @Column(name = "`RETURN_INFO`")
+    private String returnInfo;
+
+    /**
+     * 复杂类型对象
+     */
+    @Column(name = "`TYPE_OBJ`")
+    private String typeObj;
+
+    /**
+     * 错误码说明
+     */
+    @Column(name = "`ERROR_CODE`")
+    private String errorCode;
 
     /**
      * 获取唯一标识
@@ -180,7 +210,7 @@ public class Api {
      *
      * @return TYPE - 类型:内网Intranet/外网Internet
      */
-    public String getType() {
+    public Byte getType() {
         return type;
     }
 
@@ -189,7 +219,7 @@ public class Api {
      *
      * @param type 类型:内网Intranet/外网Internet
      */
-    public void setType(String type) {
+    public void setType(Byte type) {
         this.type = type;
     }
 
@@ -245,5 +275,95 @@ public class Api {
      */
     public void setServiceVersionId(Integer serviceVersionId) {
         this.serviceVersionId = serviceVersionId;
+    }
+
+    /**
+     * 获取请求头部
+     *
+     * @return HEADER - 请求头部
+     */
+    public String getHeader() {
+        return header;
+    }
+
+    /**
+     * 设置请求头部
+     *
+     * @param header 请求头部
+     */
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    /**
+     * 获取请求参数
+     *
+     * @return PARAMETERS - 请求参数
+     */
+    public String getParameters() {
+        return parameters;
+    }
+
+    /**
+     * 设置请求参数
+     *
+     * @param parameters 请求参数
+     */
+    public void setParameters(String parameters) {
+        this.parameters = parameters;
+    }
+
+    /**
+     * 获取返回信息
+     *
+     * @return RETURN_INFO - 返回信息
+     */
+    public String getReturnInfo() {
+        return returnInfo;
+    }
+
+    /**
+     * 设置返回信息
+     *
+     * @param returnInfo 返回信息
+     */
+    public void setReturnInfo(String returnInfo) {
+        this.returnInfo = returnInfo;
+    }
+
+    /**
+     * 获取复杂类型对象
+     *
+     * @return TYPE_OBJ - 复杂类型对象
+     */
+    public String getTypeObj() {
+        return typeObj;
+    }
+
+    /**
+     * 设置复杂类型对象
+     *
+     * @param typeObj 复杂类型对象
+     */
+    public void setTypeObj(String typeObj) {
+        this.typeObj = typeObj;
+    }
+
+    /**
+     * 获取错误码说明
+     *
+     * @return ERROR_CODE - 错误码说明
+     */
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    /**
+     * 设置错误码说明
+     *
+     * @param errorCode 错误码说明
+     */
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 }

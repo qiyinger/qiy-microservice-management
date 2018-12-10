@@ -95,7 +95,7 @@ public class SystemQuery extends BaseQuery<System> {
         this.code = code;
     }
 
-    public enum SystemEnum implements QueryEnum<System> {
+    public enum Enum implements QueryEnum<System> {
         ID("id"),
         CODE("code"),
         NAME("name"),
@@ -107,7 +107,7 @@ public class SystemQuery extends BaseQuery<System> {
 
         private String fieldName;
 
-        SystemEnum(String fieldName) {
+        Enum(String fieldName) {
             this.fieldName = fieldName;
         }
 

@@ -9,7 +9,6 @@ import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.management.entity.Application;
 import swust.qiy.microservice.management.query.ApplicationQuery;
 import swust.qiy.microservice.management.service.ApplicationService;
-import swust.qiy.microservice.management.service.MicroserviceService;
 
 /**
  * @author qiying
@@ -32,12 +31,12 @@ public class ApplicationController {
     @ResponseBody
     public Result list(@RequestBody ApplicationQuery query) {
         Criteria<Application> criteria = new Criteria<Application>()
-                .equal(ApplicationQuery.ApplicationEnum.CODE, query.getCode())
-                .like(ApplicationQuery.ApplicationEnum.NAME, query.getName())
-                .gte(ApplicationQuery.ApplicationEnum.CREATE_TIME, query.getStartTime())
-                .lte(ApplicationQuery.ApplicationEnum.CREATE_TIME, query.getEndTime())
-                .equal(ApplicationQuery.ApplicationEnum.STATUS, query.getStatus())
-                .equal(ApplicationQuery.ApplicationEnum.SYSTEM_ID, query.getSystemId());
+                .equal(ApplicationQuery.Enum.CODE, query.getCode())
+                .like(ApplicationQuery.Enum.NAME, query.getName())
+                .gte(ApplicationQuery.Enum.CREATE_TIME, query.getStartTime())
+                .lte(ApplicationQuery.Enum.CREATE_TIME, query.getEndTime())
+                .equal(ApplicationQuery.Enum.STATUS, query.getStatus())
+                .equal(ApplicationQuery.Enum.SYSTEM_ID, query.getSystemId());
         return applicationService.findAll(criteria, query.getPage());
     }
 
@@ -71,7 +70,7 @@ public class ApplicationController {
     @PostMapping("/update")
     @ResponseBody
     public Result update(@RequestBody Application application) {
-        if (application.getId() == null) {
+        if (application.getSystemId() == null) {
             return new Result().fail(ResultCodeEnum.PARAM_ERROR, "所属系统不能为空");
         }
         return applicationService.update(application);

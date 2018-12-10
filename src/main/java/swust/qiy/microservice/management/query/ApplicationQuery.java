@@ -83,7 +83,7 @@ public class ApplicationQuery extends BaseQuery {
         this.code = code;
     }
 
-    public enum ApplicationEnum implements QueryEnum<Application> {
+    public enum Enum implements QueryEnum<Application> {
         ID("id"),
         CODE("code"),
         NAME("name"),
@@ -94,7 +94,7 @@ public class ApplicationQuery extends BaseQuery {
 
         private String fieldName;
 
-        ApplicationEnum(String fieldName) {
+        Enum(String fieldName) {
             this.fieldName = fieldName;
         }
 
