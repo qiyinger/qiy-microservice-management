@@ -1,72 +1,42 @@
 package swust.qiy.microservice.management.service.impl;
 
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import swust.qiy.microservice.core.enums.ResultCodeEnum;
-import swust.qiy.microservice.core.query.Criteria;
 import swust.qiy.microservice.core.result.Result;
+import swust.qiy.microservice.core.result.ResultUtil;
 import swust.qiy.microservice.core.service.impl.BaseServiceImpl;
+import swust.qiy.microservice.core.util.CommonUtil;
 import swust.qiy.microservice.management.dao.ApplicationDao;
-import swust.qiy.microservice.management.dao.MicroserviceDao;
-import swust.qiy.microservice.management.dao.MicroserviceVersionDao;
+import swust.qiy.microservice.management.entity.Application;
 import swust.qiy.microservice.management.entity.Microservice;
-import swust.qiy.microservice.management.entity.MicroserviceVersion;
-import swust.qiy.microservice.management.query.MicroserviceQuery;
-import swust.qiy.microservice.management.query.MicroserviceVersionQuery;
 import swust.qiy.microservice.management.service.MicroserviceService;
-
-import java.time.LocalDateTime;
 
 /**
  * @author qiying
  */
 @Service
-public class MicroserviceServiceImpl extends BaseServiceImpl<Microservice> implements MicroserviceService {
+public class MicroserviceServiceImpl extends BaseServiceImpl<Microservice>
+  implements MicroserviceService {
 
+  @Autowired
+  private ApplicationDao applicationDao;
 
-    @Autowired
-    private MicroserviceDao microserviceDao;
-    @Autowired
-    private ApplicationDao applicationDao;
-    @Autowired
-    private MicroserviceVersionDao microserviceVersionDao;
-
-    public Result<Microservice> save(Microservice microservice) {
-        if (!isAppExist(microservice.getAppId())) {
-            return new Result<>().fail(ResultCodeEnum.RECORD_NOT_EXIST, "应用不存在");
-        }
-        if (isExist(microservice)) {
-            return new Result<>().fail(ResultCodeEnum.RECORD_EXIST);
-        }
-        microservice.setCreateTime(LocalDateTime.now());
-        microservice.setIsDeleted(false);
-        return super.save(microservice);
+  @Override
+  public Result save(Microservice model) {
+    if (CommonUtil.isEmpty(model.getAppId())) {
+      return ResultUtil.create(ResultCodeEnum.PARAM_ERROR, "应用Id不能为空");
     }
-
-    public Result<Microservice> update(Microservice microservice) {
-        if (isExist(microservice)) {
-            return new Result<>().fail(ResultCodeEnum.RECORD_EXIST);
-        }
-        return super.save(microservice);
+    Application application = applicationDao.selectById(model.getAppId());
+    if (CommonUtil.isEmpty(application)) {
+      return ResultUtil.create(ResultCodeEnum.PARAM_ERROR, "应用Id错误");
     }
-
-    public Result deleteByIds(String ids) {
-        long count = microserviceVersionDao.count(new Criteria<MicroserviceVersion>()
-                .in(MicroserviceVersionQuery.Enum.MICROSERVICE_ID, ids));
-        if (count != 0) {
-            return new Result().fail(ResultCodeEnum.DISABLE_DELETE);
-        }
-        return super.deleteByIds(ids);
+    if (CommonUtil.isEmpty(model.getCode())) {
+      ResultUtil.create(ResultCodeEnum.PARAM_ERROR, "应用编号不能为空");
     }
-
-    private boolean isExist(Microservice microservice) {
-        long count = microserviceDao.count(new Criteria<Microservice>()
-                .equal(MicroserviceQuery.Enum.CODE, microservice.getCode()));
-        return count != 0;
-    }
-
-
-    private boolean isAppExist(Integer appId) {
-        return applicationDao.existsById(appId);
-    }
+    model.setCode(application.getCode() + "-" + model.getCode());
+    model.setCreateTime(LocalDateTime.now());
+    return super.save(model);
+  }
 }

@@ -1,0 +1,54 @@
+package swust.qiy.microservice.management.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import swust.qiy.microservice.core.enums.ResultCodeEnum;
+import swust.qiy.microservice.core.page.PageImpl;
+import swust.qiy.microservice.core.result.Result;
+import swust.qiy.microservice.core.result.ResultUtil;
+import swust.qiy.microservice.core.util.CommonUtil;
+import swust.qiy.microservice.management.controller.from.BaseForm;
+import swust.qiy.microservice.management.entity.PlatformConfig;
+import swust.qiy.microservice.management.query.PlatformConfigQuery;
+import swust.qiy.microservice.management.service.PlatformConfigService;
+
+/**
+ * @author qiying
+ */
+@RequestMapping("/platformConfig")
+@RestController
+public class PlatformConfigController {
+
+  @Autowired
+  private PlatformConfigService platformConfigService;
+
+  @RequestMapping("/page")
+  @ResponseBody
+  public Result<PageImpl<PlatformConfig>> query(@RequestBody PlatformConfigQuery query) {
+    return platformConfigService.findPage(query);
+  }
+
+  @RequestMapping("/save")
+  @ResponseBody
+  public Result save(@RequestBody PlatformConfig platformConfig) {
+    return platformConfigService.save(platformConfig);
+  }
+
+  @RequestMapping("/update")
+  @ResponseBody
+  public Result update(@RequestBody PlatformConfig platformConfig) {
+    return platformConfigService.update(platformConfig);
+  }
+
+  @RequestMapping("/delete")
+  @ResponseBody
+  public Result delete(@RequestBody BaseForm form) {
+    if (CommonUtil.isEmpty(form.getIds())) {
+      return ResultUtil.create(ResultCodeEnum.PARAM_ERROR);
+    }
+    return platformConfigService.deleteByIds(form.getIds());
+  }
+}

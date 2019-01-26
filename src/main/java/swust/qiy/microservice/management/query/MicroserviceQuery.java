@@ -1,96 +1,58 @@
 package swust.qiy.microservice.management.query;
 
-import lombok.ToString;
-import swust.qiy.microservice.core.enums.QueryEnum;
-import swust.qiy.microservice.core.query.BaseQuery;
-import swust.qiy.microservice.management.entity.Microservice;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import java.time.LocalDateTime;
+import lombok.Data;
+import swust.qiy.microservice.core.query.BaseQuery;
+import swust.qiy.microservice.core.util.CommonUtil;
+import swust.qiy.microservice.management.entity.Microservice;
 
 /**
  * @author qiying
- * @create 2018/12/8
  */
+@Data
 public class MicroserviceQuery extends BaseQuery<Microservice> {
 
-    private Integer id;
+  private Integer id;
+  private String code;
+  private String name;
+  private Integer appId;
+  private LocalDateTime startCreateTime;
+  private LocalDateTime endCreateTime;
+  private LocalDateTime createTime;
+  private String description;
+  private Boolean isDeleted;
 
-    private String code;
-
-    private String name;
-
-    private Integer appId;
-
-    private LocalDateTime startTime;
-
-    private LocalDateTime endTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Integer appId) {
-        this.appId = appId;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public enum Enum implements QueryEnum<Microservice> {
-        ID("id"),
-        CODE("code"),
-        NAME("name"),
-        CREATE_TIME("createTime"),
-        APP_ID("app_id"),
-        ;
-
-        private String field;
-
-        Enum(String field) {
-            this.field = field;
-        }
-
-        @Override
-        public String getFieldName() {
-            return field;
-        }
-    }
-
+  @Override
+  public QueryWrapper<Microservice> toQueryWrapper() {
+    QueryWrapper<Microservice> queryWrapper = new QueryWrapper<>();
+      if (!CommonUtil.isEmpty(id)) {
+        queryWrapper.eq("id", id);
+      }
+      if (!CommonUtil.isEmpty(code)) {
+        queryWrapper.eq("code", code);
+      }
+      if (!CommonUtil.isEmpty(name)) {
+        queryWrapper.eq("name", name);
+      }
+      if (!CommonUtil.isEmpty(appId)) {
+        queryWrapper.eq("app_id", appId);
+      }
+      if (!CommonUtil.isEmpty(startCreateTime)) {
+        queryWrapper.ge("create_time", startCreateTime);
+      }
+      if (!CommonUtil.isEmpty(endCreateTime)) {
+        queryWrapper.le("create_time", endCreateTime);
+      }
+      if (!CommonUtil.isEmpty(createTime)) {
+        queryWrapper.eq("create_time", createTime);
+      }
+      if (!CommonUtil.isEmpty(description)) {
+        queryWrapper.eq("description", description);
+      }
+      if (!CommonUtil.isEmpty(isDeleted)) {
+        queryWrapper.eq("is_deleted", isDeleted);
+      }
+    return queryWrapper;
+  }
 }

@@ -7,93 +7,94 @@ import java.util.Date;
  * @create 2018/11/9
  */
 public class SystemVO {
-    /**
-     * 系统id
-     */
-    private String id;
 
-    /**
-     * 系统编号
-     */
-    private String code;
+  /**
+   * 系统id
+   */
+  private String id;
 
-    /**
-     * 系统名称
-     */
-    private String name;
+  /**
+   * 系统编号
+   */
+  private String code;
 
-    /**
-     * 系统状态
-     */
-    private Integer status;
+  /**
+   * 系统名称
+   */
+  private String name;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+  /**
+   * 系统状态
+   */
+  private Integer status;
 
-    /**
-     * 系统描述
-     */
-    private String description;
+  /**
+   * 创建时间
+   */
+  private Date createTime;
 
-    public String getId() {
-        return id;
-    }
+  /**
+   * 系统描述
+   */
+  private String description;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public String getCode() {
-        return code;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setCode(String code) {
+    this.code = code;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public Integer getStatus() {
-        return status;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+  public Integer getStatus() {
+    return status;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setStatus(Integer status) {
+    this.status = status;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public Date getCreateTime() {
+    return createTime;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    @Override
-    public String toString() {
-        return "SystemVO{" +
-                "id='" + id + '\'' +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                ", description='" + description + '\'' +
-                '}';
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  @Override
+  public String toString() {
+    return "SystemVO{" +
+      "id='" + id + '\'' +
+      ", code='" + code + '\'' +
+      ", name='" + name + '\'' +
+      ", status=" + status +
+      ", createTime=" + createTime +
+      ", description='" + description + '\'' +
+      '}';
+  }
 }

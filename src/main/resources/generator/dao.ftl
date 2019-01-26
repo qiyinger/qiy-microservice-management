@@ -1,14 +1,12 @@
 package ${package};
 
-import org.springframework.stereotype.Repository;
-import swust.qiy.microservice.core.dao.BaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import ${tableClass.fullClassName};
 
 /**
  * @author qiying
  */
-@Repository
-public interface ${tableClass.shortClassName}${mapperSuffix} extends BaseDao<${tableClass.shortClassName}> {
+public interface ${tableClass.shortClassName}${mapperSuffix} extends BaseMapper<${tableClass.shortClassName}> {
 
 }
 

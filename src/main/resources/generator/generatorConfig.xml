@@ -1,66 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration
-        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <!--根节点 -->
 <generatorConfiguration>
-    <!-- 指定外部的属性元素 -->
-    <properties resource="application.yml"/>
-    <!-- 必须 指定生成一组对象的环境 -->
-    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
-        <!--分隔符 -->
-        <property name="autoDelimitKeywords" value="true"/>
-        <property name="beginningDelimiter" value="`"/>
-        <property name="endingDelimiter" value="`"/>
+  <!-- 指定外部的属性元素 -->
+  <properties resource="application.yml"/>
+  <!-- 必须 指定生成一组对象的环境 -->
+  <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <!--分隔符 -->
+    <property name="autoDelimitKeywords" value="true"/>
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
 
-        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="swust.qiy.microservice.core.dao.BaseDao"/>
-            <property name="caseSensitive" value="true"/>
-            <property name="forceAnnotation" value="true"/>
-            <property name="beginningDelimiter" value="`"/>
-            <property name="endingDelimiter" value="`"/>
-        </plugin>
+    <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+      <property name="mappers" value="swust.qiy.microservice.core.dao.BaseDao"/>
+      <property name="caseSensitive" value="true"/>
+      <property name="forceAnnotation" value="true"/>
+      <property name="beginningDelimiter" value="`"/>
+      <property name="endingDelimiter" value="`"/>
+    </plugin>
 
-        <!--通用代码生成器插件-->
-        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
-            <property name="targetProject" value="./src/test/java"/>
-            <property name="targetPackage" value="swust.qiy.microservice.management.dao"/>
-            <property name="templatePath" value="file:///Users/qiying/Documents/projects/java/design/qiy-microservice-management/src/main/resources/generator/dao.ftl"/>
-            <property name="mapperSuffix" value="Dao"/>
-            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
-        </plugin>
+    <!--通用代码生成器插件-->
+    <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+      <property name="targetProject" value="./src/generator"/>
+      <property name="targetPackage" value="swust.qiy.microservice.management.dao"/>
+      <property name="templatePath"
+        value="file:///Users/qiying/Documents/projects/java/design/qiy-microservice-management/src/main/resources/generator/dao.ftl"/>
+      <property name="mapperSuffix" value="Dao"/>
+      <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
+    </plugin>
 
-        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
-            <property name="targetProject" value="./src/test/java"/>
-            <property name="targetPackage" value="swust.qiy.microservice.management.service"/>
-            <property name="templatePath" value="file:///Users/qiying/Documents/projects/java/design/qiy-microservice-management/src/main/resources/generator/service.ftl"/>
-            <property name="mapperSuffix" value="Service"/>
-            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
-        </plugin>
+    <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+      <property name="targetProject" value="./src/generator"/>
+      <property name="targetPackage" value="swust.qiy.microservice.management.service"/>
+      <property name="templatePath"
+        value="file:///Users/qiying/Documents/projects/java/design/qiy-microservice-management/src/main/resources/generator/service.ftl"/>
+      <property name="mapperSuffix" value="Service"/>
+      <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
+    </plugin>
 
-        <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
-            <property name="targetProject" value="./src/test/java"/>
-            <property name="targetPackage" value="swust.qiy.microservice.management.service.impl"/>
-            <property name="templatePath" value="file:///Users/qiying/Documents/projects/java/design/qiy-microservice-management/src/main/resources/generator/serviceImpl.ftl"/>
-            <property name="mapperSuffix" value="ServiceImpl"/>
-            <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
-        </plugin>
+    <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
+      <property name="targetProject" value="./src/generator"/>
+      <property name="targetPackage" value="swust.qiy.microservice.management.service.impl"/>
+      <property name="templatePath"
+        value="file:///Users/qiying/Documents/projects/java/design/qiy-microservice-management/src/main/resources/generator/serviceImpl.ftl"/>
+      <property name="mapperSuffix" value="ServiceImpl"/>
+      <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.java"/>
+    </plugin>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://106.15.182.191:3306/micro_manage"
-                        userId="root"
-                        password="1997">
-        </jdbcConnection>
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+      connectionURL="jdbc:mysql://106.15.182.191:3306/micro_manage"
+      userId="root"
+      password="1997">
+    </jdbcConnection>
 
-        <javaModelGenerator targetPackage="swust.qiy.microservice.management.entity" targetProject="./src/test/java"/>
+    <javaModelGenerator targetPackage="swust.qiy.microservice.management.entity"
+      targetProject="./src/generator"/>
 
 
-        <table tableName="%">
-            <!--mysql 配置-->
-            <generatedKey column="id"   sqlStatement=" " identity="true"/>
-            <!--oracle 配置-->
-            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
-        </table>
+    <table tableName="%">
+      <!--mysql 配置-->
+      <!--<generatedKey column="id"   sqlStatement=" " identity="true"/>-->
+      <!--oracle 配置-->
+      <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+    </table>
 
-    </context>
+  </context>
 </generatorConfiguration>

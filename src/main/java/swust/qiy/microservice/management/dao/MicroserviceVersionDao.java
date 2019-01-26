@@ -1,14 +1,12 @@
 package swust.qiy.microservice.management.dao;
 
-import org.springframework.stereotype.Repository;
-import swust.qiy.microservice.core.dao.BaseDao;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import swust.qiy.microservice.management.entity.MicroserviceVersion;
 
 /**
  * @author qiying
  */
-@Repository
-public interface MicroserviceVersionDao extends BaseDao<MicroserviceVersion> {
+public interface MicroserviceVersionDao extends BaseMapper<MicroserviceVersion> {
 
 }
 

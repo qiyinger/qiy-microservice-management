@@ -1,160 +1,74 @@
 package swust.qiy.microservice.management.query;
 
-import swust.qiy.microservice.core.enums.QueryEnum;
-import swust.qiy.microservice.core.query.BaseQuery;
-import swust.qiy.microservice.management.entity.ApiApply;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import java.time.LocalDateTime;
+import lombok.Data;
+import swust.qiy.microservice.core.query.BaseQuery;
+import swust.qiy.microservice.core.util.CommonUtil;
+import swust.qiy.microservice.management.entity.ApiApply;
 
 /**
  * @author qiying
- * @create 2018/12/10
  */
-public class ApiApplyQuery extends BaseQuery {
+@Data
+public class ApiApplyQuery extends BaseQuery<ApiApply> {
 
-    private Integer id;
+  private Integer id;
+  private String applicant;
+  private Byte status;
+  private Byte type;
+  private LocalDateTime startApplyTime;
+  private LocalDateTime endApplyTime;
+  private LocalDateTime applyTime;
+  private String description;
+  private String auditorName;
+  private Integer asId;
+  private LocalDateTime startModifyTime;
+  private LocalDateTime endModifyTime;
+  private LocalDateTime modifyTime;
 
-    /**
-     * 申请人
-     */
-    private String applicant;
-
-    /**
-     * 审核状态,0:等待审核;1:通过;2:打回
-     */
-    private Byte status;
-
-    /**
-     * 申请类型:service(微服务),api(接口)
-     */
-    private Byte type;
-
-    /**
-     * 申请时间
-     */
-    private LocalDateTime startTime;
-
-    private LocalDateTime endTime;
-
-    /**
-     * 审核人
-     */
-    private String auditorName;
-
-    /**
-     * 接口/微服务版本标识
-     */
-    private Integer asId;
-
-    /**
-     * 修改时间
-     */
-    private LocalDateTime startMTime;
-
-    private LocalDateTime endMTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getApplicant() {
-        return applicant;
-    }
-
-    public void setApplicant(String applicant) {
-        this.applicant = applicant;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Byte getType() {
-        return type;
-    }
-
-    public void setType(Byte type) {
-        this.type = type;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public String getAuditorName() {
-        return auditorName;
-    }
-
-    public void setAuditorName(String auditorName) {
-        this.auditorName = auditorName;
-    }
-
-    public Integer getAsId() {
-        return asId;
-    }
-
-    public void setAsId(Integer asId) {
-        this.asId = asId;
-    }
-
-    public LocalDateTime getStartMTime() {
-        return startMTime;
-    }
-
-    public void setStartMTime(LocalDateTime startMTime) {
-        this.startMTime = startMTime;
-    }
-
-    public LocalDateTime getEndMTime() {
-        return endMTime;
-    }
-
-    public void setEndMTime(LocalDateTime endMTime) {
-        this.endMTime = endMTime;
-    }
-
-    public enum Enum implements QueryEnum<ApiApply> {
-        ID("id"),
-        APPLICANT("applicant"),
-        STATUS("status"),
-        TYPE("type"),
-        APPLY_TIME("apply_time"),
-        AUDITOR_NAME("auditor_name"),
-        MODIFY_TIME("modify_time"),
-        AS_ID("as_id"),
-        ;
-
-        private String fieldName;
-
-        Enum(String fieldName) {
-            this.fieldName = fieldName;
-        }
-
-        @Override
-        public String getFieldName() {
-            return null;
-        }
-    }
-
-
+  @Override
+  public QueryWrapper<ApiApply> toQueryWrapper() {
+    QueryWrapper<ApiApply> queryWrapper = new QueryWrapper<>();
+      if (!CommonUtil.isEmpty(id)) {
+        queryWrapper.eq("id", id);
+      }
+      if (!CommonUtil.isEmpty(applicant)) {
+        queryWrapper.eq("applicant", applicant);
+      }
+      if (!CommonUtil.isEmpty(status)) {
+        queryWrapper.eq("status", status);
+      }
+      if (!CommonUtil.isEmpty(type)) {
+        queryWrapper.eq("type", type);
+      }
+      if (!CommonUtil.isEmpty(startApplyTime)) {
+        queryWrapper.ge("apply_time", startApplyTime);
+      }
+      if (!CommonUtil.isEmpty(endApplyTime)) {
+        queryWrapper.le("apply_time", endApplyTime);
+      }
+      if (!CommonUtil.isEmpty(applyTime)) {
+        queryWrapper.eq("apply_time", applyTime);
+      }
+      if (!CommonUtil.isEmpty(description)) {
+        queryWrapper.eq("description", description);
+      }
+      if (!CommonUtil.isEmpty(auditorName)) {
+        queryWrapper.eq("auditor_name", auditorName);
+      }
+      if (!CommonUtil.isEmpty(asId)) {
+        queryWrapper.eq("as_id", asId);
+      }
+      if (!CommonUtil.isEmpty(startModifyTime)) {
+        queryWrapper.ge("modify_time", startModifyTime);
+      }
+      if (!CommonUtil.isEmpty(endModifyTime)) {
+        queryWrapper.le("modify_time", endModifyTime);
+      }
+      if (!CommonUtil.isEmpty(modifyTime)) {
+        queryWrapper.eq("modify_time", modifyTime);
+      }
+    return queryWrapper;
+  }
 }

@@ -1,79 +1,57 @@
 package swust.qiy.microservice.management.controller;
 
-import org.apache.commons.lang3.StringUtils;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import swust.qiy.microservice.core.enums.ResultCodeEnum;
-import swust.qiy.microservice.core.query.Criteria;
+import swust.qiy.microservice.core.page.PageImpl;
 import swust.qiy.microservice.core.result.Result;
+import swust.qiy.microservice.core.result.ResultUtil;
+import swust.qiy.microservice.core.util.CommonUtil;
+import swust.qiy.microservice.management.controller.from.BaseForm;
 import swust.qiy.microservice.management.entity.Application;
 import swust.qiy.microservice.management.query.ApplicationQuery;
 import swust.qiy.microservice.management.service.ApplicationService;
 
 /**
  * @author qiying
- * @create 2018/12/7
  */
 @RequestMapping("/application")
 @RestController
 public class ApplicationController {
 
-    @Autowired
-    private ApplicationService applicationService;
+  @Autowired
+  private ApplicationService applicationService;
 
-    /**
-     * 条件查询系统
-     *
-     * @param query
-     * @return
-     */
-    @PostMapping(value = "/list")
-    @ResponseBody
-    public Result list(@RequestBody ApplicationQuery query) {
-        Criteria<Application> criteria = new Criteria<Application>()
-                .equal(ApplicationQuery.Enum.CODE, query.getCode())
-                .like(ApplicationQuery.Enum.NAME, query.getName())
-                .gte(ApplicationQuery.Enum.CREATE_TIME, query.getStartTime())
-                .lte(ApplicationQuery.Enum.CREATE_TIME, query.getEndTime())
-                .equal(ApplicationQuery.Enum.STATUS, query.getStatus())
-                .equal(ApplicationQuery.Enum.SYSTEM_ID, query.getSystemId());
-        return applicationService.findAll(criteria, query.getPage());
+  @RequestMapping("/page")
+  @ResponseBody
+  public Result<PageImpl<Application>> query(@RequestBody ApplicationQuery query) {
+    return applicationService.findPage(query);
+  }
+
+  @RequestMapping("/save")
+  @ResponseBody
+  public Result save(@RequestBody Application application) {
+    application.setCreateTime(LocalDateTime.now());
+    application.setStatus((byte) 0);
+    return applicationService.save(application);
+  }
+
+  @RequestMapping("/update")
+  @ResponseBody
+  public Result update(@RequestBody Application application) {
+    return applicationService.update(application);
+  }
+
+  @RequestMapping("/delete")
+  @ResponseBody
+  public Result delete(@RequestBody BaseForm form) {
+    if (CommonUtil.isEmpty(form.getIds())) {
+      return ResultUtil.create(ResultCodeEnum.PARAM_ERROR);
     }
-
-    /**
-     * 保存一个系统
-     *
-     * @param application
-     * @return
-     */
-    @PostMapping("/save")
-    @ResponseBody
-    public Result save(@RequestBody Application application) {
-        if (StringUtils.isEmpty(application.getCode())) {
-            return new Result().fail(ResultCodeEnum.PARAM_ERROR, "应用编码不能为空");
-        }
-        if (StringUtils.isEmpty(application.getName())) {
-            return new Result().fail(ResultCodeEnum.PARAM_ERROR, "应用名称不能为空");
-        }
-        if (application.getSystemId() == null) {
-            return new Result().fail(ResultCodeEnum.PARAM_ERROR, "所属系统不能为空");
-        }
-        return applicationService.save(application);
-    }
-
-    /**
-     * 更新系统
-     *
-     * @param application
-     * @return
-     */
-    @PostMapping("/update")
-    @ResponseBody
-    public Result update(@RequestBody Application application) {
-        if (application.getSystemId() == null) {
-            return new Result().fail(ResultCodeEnum.PARAM_ERROR, "所属系统不能为空");
-        }
-        return applicationService.update(application);
-    }
-
+    return applicationService.deleteByIds(form.getIds());
+  }
 }
