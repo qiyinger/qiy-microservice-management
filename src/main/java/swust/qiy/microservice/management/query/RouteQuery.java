@@ -2,6 +2,7 @@ package swust.qiy.microservice.management.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Data;
 import swust.qiy.microservice.core.query.BaseQuery;
 import swust.qiy.microservice.core.util.CommonUtil;
@@ -14,6 +15,7 @@ import swust.qiy.microservice.management.entity.Route;
 public class RouteQuery extends BaseQuery<Route> {
 
   private Integer id;
+  private List<Integer> ids;
   private String name;
   private LocalDateTime startCreateTime;
   private LocalDateTime endCreateTime;
@@ -24,6 +26,7 @@ public class RouteQuery extends BaseQuery<Route> {
   private String description;
   private Boolean active;
   private Integer gatewayId;
+  private List<Integer> gatewayIds;
   private String yml;
   private String rule;
 
@@ -31,43 +34,49 @@ public class RouteQuery extends BaseQuery<Route> {
   public QueryWrapper<Route> toQueryWrapper() {
     QueryWrapper<Route> queryWrapper = new QueryWrapper<>();
       if (!CommonUtil.isEmpty(id)) {
-        queryWrapper.eq("id", id);
+      queryWrapper.eq("id", id);
+      }
+      if (!CommonUtil.isEmpty(ids)) {
+      queryWrapper.in("id", ids);
       }
       if (!CommonUtil.isEmpty(name)) {
-        queryWrapper.eq("name", name);
+      queryWrapper.eq("name", name);
       }
       if (!CommonUtil.isEmpty(startCreateTime)) {
-        queryWrapper.ge("create_time", startCreateTime);
+      queryWrapper.ge("create_time", startCreateTime);
       }
       if (!CommonUtil.isEmpty(endCreateTime)) {
-        queryWrapper.le("create_time", endCreateTime);
+      queryWrapper.le("create_time", endCreateTime);
       }
       if (!CommonUtil.isEmpty(createTime)) {
-        queryWrapper.eq("create_time", createTime);
+      queryWrapper.eq("create_time", createTime);
       }
       if (!CommonUtil.isEmpty(startUpdateTime)) {
-        queryWrapper.ge("update_time", startUpdateTime);
+      queryWrapper.ge("update_time", startUpdateTime);
       }
       if (!CommonUtil.isEmpty(endUpdateTime)) {
-        queryWrapper.le("update_time", endUpdateTime);
+      queryWrapper.le("update_time", endUpdateTime);
       }
       if (!CommonUtil.isEmpty(updateTime)) {
-        queryWrapper.eq("update_time", updateTime);
+      queryWrapper.eq("update_time", updateTime);
       }
       if (!CommonUtil.isEmpty(description)) {
-        queryWrapper.eq("description", description);
+      queryWrapper.eq("description", description);
       }
       if (!CommonUtil.isEmpty(active)) {
-        queryWrapper.eq("active", active);
+      queryWrapper.eq("active", active);
       }
       if (!CommonUtil.isEmpty(gatewayId)) {
-        queryWrapper.eq("gateway_id", gatewayId);
+      queryWrapper.eq("gateway_id", gatewayId);
+      }
+      if (!CommonUtil.isEmpty(gatewayIds)) {
+        queryWrapper.in("gateway_id", gatewayIds);
       }
       if (!CommonUtil.isEmpty(yml)) {
-        queryWrapper.eq("yml", yml);
+      queryWrapper.eq("yml", yml);
       }
       if (!CommonUtil.isEmpty(rule)) {
-        queryWrapper.eq("rule", rule);
+      queryWrapper.eq("rule", rule);
       }
     return queryWrapper;
   }

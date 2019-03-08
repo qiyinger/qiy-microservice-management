@@ -33,7 +33,7 @@ public class MicroserviceServiceImpl extends BaseServiceImpl<Microservice>
       return ResultUtil.create(ResultCodeEnum.PARAM_ERROR, "应用Id错误");
     }
     if (CommonUtil.isEmpty(model.getCode())) {
-      ResultUtil.create(ResultCodeEnum.PARAM_ERROR, "应用编号不能为空");
+      ResultUtil.create(ResultCodeEnum.PARAM_ERROR, "微服务编号不能为空");
     }
     model.setCode(application.getCode() + "-" + model.getCode());
     model.setCreateTime(LocalDateTime.now());

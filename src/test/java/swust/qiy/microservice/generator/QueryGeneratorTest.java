@@ -3,20 +3,33 @@ package swust.qiy.microservice.generator;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import swust.qiy.microservice.core.util.PackageUtil;
 import swust.qiy.microservice.core.util.StringUtil;
@@ -27,6 +40,68 @@ import swust.qiy.microservice.management.ManagementApp;
  * @create 2019/1/23
  */
 public class QueryGeneratorTest {
+
+  public static String postForForm(String url, Map<String, String> parms) {
+    HttpPost httpPost = new HttpPost(url);
+    ArrayList<BasicNameValuePair> list = new ArrayList<>();
+    parms.forEach((key, value) -> list.add(new BasicNameValuePair(key, value)));
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+    String resultString = "";
+    try {
+      if (Objects.nonNull(parms) && parms.size() > 0) {
+        httpPost.setEntity(new UrlEncodedFormEntity(list, "UTF-8"));
+      }
+      InputStream content = httpPost.getEntity().getContent();
+      InputStreamReader inputStreamReader = new InputStreamReader(content, "UTF-8");
+      BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+      String readLine = bufferedReader.readLine();
+      System.out.println("readLine===================================" + readLine);
+      HttpResponse response = httpClient.execute(httpPost);
+      resultString = EntityUtils.toString(response.getEntity(), "utf-8");
+
+      return resultString;
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      if (Objects.nonNull(httpClient)) {
+        try {
+          httpClient.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return null;
+  }
+
+  public static void main(String[] args) throws IOException {
+
+    org.apache.commons.httpclient.HttpClient httpClient = new org.apache.commons.httpclient.HttpClient();
+    //2、创建get或post请求方法
+    PostMethod method = new PostMethod("http://118.25.88.219:8105/v2/sms/multi_send.json");
+    //3、设置编码
+    httpClient.getParams().setContentCharset("UTF-8");
+    //4、设置请求消息头，为表单方式提交
+    method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+
+    String text1 = "【测试签名15】您的验证码是1234。如非本人操作，请忽略本短信" + String.valueOf((char)160) + "测试提交";
+    String apikey1 = "4bec4b81b990426fe69c07d2383c0780";
+
+    String text2 = URLEncoder.encode(
+      "【节假日放假通知】尊敬的用户：您的" + String.valueOf((char)160) + String.valueOf((char)160) + "订单已提交");
+    String apikey2 = "d0e10203ff27d80c0cf806044c0048b6";
+    //5、设置参数
+    method.setParameter("apikey", apikey2);
+    method.setParameter("text",     text2);
+    method.setParameter("mobile", "18982899191");
+
+//		6、执行提交
+    httpClient.executeMethod(method);
+    System.out.println(method.getStatusLine());
+    System.out.println(method.getResponseBodyAsString());
+
+    System.out.println(text1);
+  }
 
   @Test
   public void testQuery() {
@@ -65,6 +140,12 @@ public class QueryGeneratorTest {
         fields2type.put(fieldName, field.getType().getSimpleName());
         fields2tableName.put(fieldName, tableName);
         fields2staticName.put(fieldName, StringUtil.camel2upUndercore(fieldName));
+        if ("id".equals(fieldName) || fieldName.endsWith("Id")) {
+          queryFields.add(fieldName + "s");
+          fields2type.put(fieldName + "s", "List<Integer>");
+          fields2tableName.put(fieldName + "s", tableName);
+          fields2staticName.put(fieldName + "s", StringUtil.camel2upUndercore(fieldName + "s"));
+        }
       });
 
       Map<String, Object> map = new HashMap<>(32);

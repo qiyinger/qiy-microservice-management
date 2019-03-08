@@ -1,5 +1,6 @@
 package swust.qiy.microservice.management.entity;
 
+
 public class StrategyCall {
 
   /**
@@ -8,9 +9,19 @@ public class StrategyCall {
   private Integer id;
 
   /**
+   * 策略名称
+   */
+  private String name;
+
+  /**
+   * 描述
+   */
+  private String description;
+
+  /**
    * 时间单位，参考JAVA TimeUnit枚举类型
    */
-  private String timeUnit;
+  private Byte timeUnit;
 
   /**
    * 时间长度
@@ -21,11 +32,6 @@ public class StrategyCall {
    * 访问次数限制
    */
   private Integer rateLimit;
-
-  /**
-   * 策略标识
-   */
-  private Integer strategyId;
 
   /**
    * 获取唯一标识
@@ -46,11 +52,47 @@ public class StrategyCall {
   }
 
   /**
+   * 获取策略名称
+   *
+   * @return name - 策略名称
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * 设置策略名称
+   *
+   * @param name 策略名称
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  /**
+   * 获取描述
+   *
+   * @return description - 描述
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  /**
+   * 设置描述
+   *
+   * @param description 描述
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  /**
    * 获取时间单位，参考JAVA TimeUnit枚举类型
    *
    * @return TIME_UNIT - 时间单位，参考JAVA TimeUnit枚举类型
    */
-  public String getTimeUnit() {
+  public Byte getTimeUnit() {
     return timeUnit;
   }
 
@@ -59,7 +101,7 @@ public class StrategyCall {
    *
    * @param timeUnit 时间单位，参考JAVA TimeUnit枚举类型
    */
-  public void setTimeUnit(String timeUnit) {
+  public void setTimeUnit(Byte timeUnit) {
     this.timeUnit = timeUnit;
   }
 
@@ -97,23 +139,5 @@ public class StrategyCall {
    */
   public void setRateLimit(Integer rateLimit) {
     this.rateLimit = rateLimit;
-  }
-
-  /**
-   * 获取策略标识
-   *
-   * @return STRATEGY_ID - 策略标识
-   */
-  public Integer getStrategyId() {
-    return strategyId;
-  }
-
-  /**
-   * 设置策略标识
-   *
-   * @param strategyId 策略标识
-   */
-  public void setStrategyId(Integer strategyId) {
-    this.strategyId = strategyId;
   }
 }

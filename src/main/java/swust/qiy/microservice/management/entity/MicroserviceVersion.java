@@ -1,6 +1,6 @@
 package swust.qiy.microservice.management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
+
 import java.time.LocalDateTime;
 
 public class MicroserviceVersion {
@@ -43,7 +43,6 @@ public class MicroserviceVersion {
   /**
    * 逻辑删除标识, 0:未删除;1:已删除
    */
-  @TableLogic
   private Boolean isDeleted;
 
   /**

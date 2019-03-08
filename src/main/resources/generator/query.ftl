@@ -22,11 +22,15 @@ public class ${classSimpleName}Query extends BaseQuery<${classSimpleName}> {
   <#list queryFields as field>
       if (!CommonUtil.isEmpty(${field})) {
         <#if field?? && field?index_of("start") == 0>
-        queryWrapper.ge("${fields2tableName[field]!}", ${field});
+      queryWrapper.ge("${fields2tableName[field]!}", ${field});
         <#elseif field?? && field?index_of("end") == 0>
-        queryWrapper.le("${fields2tableName[field]!}", ${field});
-        <#else>
-        queryWrapper.eq("${fields2tableName[field]!}", ${field});
+      queryWrapper.le("${fields2tableName[field]!}", ${field});
+        <#elseif field?? && field == "ids">
+      queryWrapper.in("id", ids);
+        <#elseif field?? && field?contains("Ids")>
+      queryWrapper.in("${fields2tableName[field]!}", ${field});
+        <#else >
+      queryWrapper.eq("${fields2tableName[field]!}", ${field});
         </#if>
       }
   </#list>

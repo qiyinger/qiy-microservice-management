@@ -1,6 +1,6 @@
 package swust.qiy.microservice.management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
+
 import java.time.LocalDateTime;
 
 public class Application {
@@ -43,13 +43,17 @@ public class Application {
   /**
    * 逻辑删除标识, 0:未删除;1:已删除
    */
-  @TableLogic
   private Boolean isDeleted;
 
   /**
    * 是否启用, 0:未启用 1:已启用
    */
   private Byte status;
+
+  /**
+   * 所属用户
+   */
+  private Integer userId;
 
   /**
    * 获取唯一标识
@@ -211,5 +215,23 @@ public class Application {
    */
   public void setStatus(Byte status) {
     this.status = status;
+  }
+
+  /**
+   * 获取所属用户
+   *
+   * @return user_id - 所属用户
+   */
+  public Integer getUserId() {
+    return userId;
+  }
+
+  /**
+   * 设置所属用户
+   *
+   * @param userId 所属用户
+   */
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
 }

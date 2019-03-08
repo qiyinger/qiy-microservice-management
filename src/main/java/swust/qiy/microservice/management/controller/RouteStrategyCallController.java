@@ -11,36 +11,36 @@ import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.core.result.ResultUtil;
 import swust.qiy.microservice.core.util.CommonUtil;
 import swust.qiy.microservice.management.controller.from.BaseForm;
-import swust.qiy.microservice.management.entity.StrategyRelation;
-import swust.qiy.microservice.management.query.StrategyRelationQuery;
-import swust.qiy.microservice.management.service.StrategyRelationService;
+import swust.qiy.microservice.management.entity.RouteStrategyCall;
+import swust.qiy.microservice.management.query.RouteStrategyCallQuery;
+import swust.qiy.microservice.management.service.RouteStrategyCallService;
 
 /**
  * @author qiying
  */
-@RequestMapping("/strategyRelation")
+@RequestMapping("/routeStrategyCall")
 @RestController
-public class StrategyRelationController {
+public class RouteStrategyCallController {
 
   @Autowired
-  private StrategyRelationService strategyRelationService;
+  private RouteStrategyCallService routeStrategyCallService;
 
   @RequestMapping("/page")
   @ResponseBody
-  public Result<PageImpl<StrategyRelation>> query(@RequestBody StrategyRelationQuery query) {
-    return strategyRelationService.findPage(query);
+  public Result<PageImpl<RouteStrategyCall>> query(@RequestBody RouteStrategyCallQuery query) {
+    return routeStrategyCallService.findPage(query);
   }
 
   @RequestMapping("/save")
   @ResponseBody
-  public Result save(@RequestBody StrategyRelation strategyRelation) {
-    return strategyRelationService.save(strategyRelation);
+  public Result save(@RequestBody RouteStrategyCall routeStrategyCall) {
+    return routeStrategyCallService.save(routeStrategyCall);
   }
 
   @RequestMapping("/update")
   @ResponseBody
-  public Result update(@RequestBody StrategyRelation strategyRelation) {
-    return strategyRelationService.update(strategyRelation);
+  public Result update(@RequestBody RouteStrategyCall routeStrategyCall) {
+    return routeStrategyCallService.update(routeStrategyCall);
   }
 
   @RequestMapping("/delete")
@@ -49,6 +49,6 @@ public class StrategyRelationController {
     if (CommonUtil.isEmpty(form.getIds())) {
       return ResultUtil.create(ResultCodeEnum.PARAM_ERROR);
     }
-    return strategyRelationService.deleteByIds(form.getIds());
+    return routeStrategyCallService.deleteByIds(form.getIds());
   }
 }

@@ -1,6 +1,6 @@
 package swust.qiy.microservice.management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
+
 import java.time.LocalDateTime;
 
 public class Microservice {
@@ -38,8 +38,17 @@ public class Microservice {
   /**
    * 逻辑删除标识, 0:未删除;1:已删除
    */
-  @TableLogic
   private Boolean isDeleted;
+
+  /**
+   * 所属用户
+   */
+  private Integer userId;
+
+  /**
+   * 所属系统
+   */
+  private Integer systemId;
 
   /**
    * 获取唯一标识
@@ -165,5 +174,41 @@ public class Microservice {
    */
   public void setIsDeleted(Boolean isDeleted) {
     this.isDeleted = isDeleted;
+  }
+
+  /**
+   * 获取所属用户
+   *
+   * @return user_id - 所属用户
+   */
+  public Integer getUserId() {
+    return userId;
+  }
+
+  /**
+   * 设置所属用户
+   *
+   * @param userId 所属用户
+   */
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
+
+  /**
+   * 获取所属系统
+   *
+   * @return system_id - 所属系统
+   */
+  public Integer getSystemId() {
+    return systemId;
+  }
+
+  /**
+   * 设置所属系统
+   *
+   * @param systemId 所属系统
+   */
+  public void setSystemId(Integer systemId) {
+    this.systemId = systemId;
   }
 }

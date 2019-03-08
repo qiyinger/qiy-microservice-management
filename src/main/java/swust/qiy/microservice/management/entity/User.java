@@ -1,5 +1,6 @@
 package swust.qiy.microservice.management.entity;
 
+
 public class User {
 
   /**

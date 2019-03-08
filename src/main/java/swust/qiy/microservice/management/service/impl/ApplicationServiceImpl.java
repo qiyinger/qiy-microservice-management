@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import swust.qiy.microservice.core.constant.StatusConstant;
 import swust.qiy.microservice.core.enums.ResultCodeEnum;
 import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.core.result.ResultUtil;
@@ -38,7 +39,7 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Application>
     }
     model.setCode(systemInfo.getCode() + "-" + model.getCode());
     model.setCreateTime(LocalDateTime.now());
-    model.setStatus((byte) 0);
+    model.setStatus(StatusConstant.DISABLE);
     return super.save(model);
   }
 }

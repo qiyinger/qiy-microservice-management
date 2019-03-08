@@ -1,6 +1,7 @@
 package swust.qiy.microservice.management.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import java.util.List;
 import lombok.Data;
 import swust.qiy.microservice.core.query.BaseQuery;
 import swust.qiy.microservice.core.util.CommonUtil;
@@ -13,6 +14,7 @@ import swust.qiy.microservice.management.entity.UserRole;
 public class UserRoleQuery extends BaseQuery<UserRole> {
 
   private Integer id;
+  private List<Integer> ids;
   private String code;
   private String name;
 
@@ -20,13 +22,16 @@ public class UserRoleQuery extends BaseQuery<UserRole> {
   public QueryWrapper<UserRole> toQueryWrapper() {
     QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
       if (!CommonUtil.isEmpty(id)) {
-        queryWrapper.eq("id", id);
+      queryWrapper.eq("id", id);
+      }
+      if (!CommonUtil.isEmpty(ids)) {
+      queryWrapper.in("id", ids);
       }
       if (!CommonUtil.isEmpty(code)) {
-        queryWrapper.eq("code", code);
+      queryWrapper.eq("code", code);
       }
       if (!CommonUtil.isEmpty(name)) {
-        queryWrapper.eq("name", name);
+      queryWrapper.eq("name", name);
       }
     return queryWrapper;
   }

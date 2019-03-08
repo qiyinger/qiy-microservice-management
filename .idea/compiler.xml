@@ -6,17 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="microservice-core" />
         <module name="microservice-environment-eureka" />
-        <module name="qiy-microservice-management" />
+        <module name="microservice-management" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="microservice-core" target="1.8" />
-      <module name="microservice-environment" target="1.8" />
-      <module name="microservice-environment-eureka" target="1.8" />
-      <module name="microservice-lib" target="1.8" />
-      <module name="qiy-microservice-management" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

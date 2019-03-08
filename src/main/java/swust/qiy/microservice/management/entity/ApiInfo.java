@@ -1,6 +1,7 @@
 package swust.qiy.microservice.management.entity;
 
-public class Api {
+
+public class ApiInfo {
 
   /**
    * 唯一标识

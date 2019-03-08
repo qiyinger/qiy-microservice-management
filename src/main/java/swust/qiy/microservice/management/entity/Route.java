@@ -1,5 +1,6 @@
 package swust.qiy.microservice.management.entity;
 
+
 import java.time.LocalDateTime;
 
 public class Route {
@@ -35,19 +36,19 @@ public class Route {
   private Boolean active;
 
   /**
+   * 配置类型 0:yml文档   1:json
+   */
+  private Byte configType;
+
+  /**
    * 所属网关标识
    */
   private Integer gatewayId;
 
   /**
-   * 路由规则(YML)
+   * 配置内容
    */
-  private String yml;
-
-  /**
-   * 路由规则(JSON)
-   */
-  private String rule;
+  private String configText;
 
   /**
    * 获取唯一标识
@@ -158,6 +159,24 @@ public class Route {
   }
 
   /**
+   * 获取配置类型 0:yml文档   1:json
+   *
+   * @return config_type - 配置类型 0:yml文档   1:json
+   */
+  public Byte getConfigType() {
+    return configType;
+  }
+
+  /**
+   * 设置配置类型 0:yml文档   1:json
+   *
+   * @param configType 配置类型 0:yml文档   1:json
+   */
+  public void setConfigType(Byte configType) {
+    this.configType = configType;
+  }
+
+  /**
    * 获取所属网关标识
    *
    * @return GATEWAY_ID - 所属网关标识
@@ -176,38 +195,20 @@ public class Route {
   }
 
   /**
-   * 获取路由规则(YML)
+   * 获取配置内容
    *
-   * @return YML - 路由规则(YML)
+   * @return config_text - 配置内容
    */
-  public String getYml() {
-    return yml;
+  public String getConfigText() {
+    return configText;
   }
 
   /**
-   * 设置路由规则(YML)
+   * 设置配置内容
    *
-   * @param yml 路由规则(YML)
+   * @param configText 配置内容
    */
-  public void setYml(String yml) {
-    this.yml = yml;
-  }
-
-  /**
-   * 获取路由规则(JSON)
-   *
-   * @return RULE - 路由规则(JSON)
-   */
-  public String getRule() {
-    return rule;
-  }
-
-  /**
-   * 设置路由规则(JSON)
-   *
-   * @param rule 路由规则(JSON)
-   */
-  public void setRule(String rule) {
-    this.rule = rule;
+  public void setConfigText(String configText) {
+    this.configText = configText;
   }
 }

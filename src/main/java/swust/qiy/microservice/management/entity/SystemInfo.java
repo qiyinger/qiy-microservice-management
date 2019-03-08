@@ -1,7 +1,6 @@
 package swust.qiy.microservice.management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 public class SystemInfo {
@@ -39,7 +38,6 @@ public class SystemInfo {
   /**
    * 订阅码
    */
-  @JsonIgnore
   private String rsskey;
 
   /**
@@ -55,9 +53,7 @@ public class SystemInfo {
   /**
    * 逻辑删除标识, 0:未删除;1:已删除
    */
-  @TableLogic
-  @JsonIgnore
-  private Boolean isDeleted = false;
+  private Boolean isDeleted;
 
   /**
    * 获取唯一标识

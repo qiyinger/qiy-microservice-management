@@ -11,36 +11,36 @@ import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.core.result.ResultUtil;
 import swust.qiy.microservice.core.util.CommonUtil;
 import swust.qiy.microservice.management.controller.from.BaseForm;
-import swust.qiy.microservice.management.entity.Strategy;
-import swust.qiy.microservice.management.query.StrategyQuery;
-import swust.qiy.microservice.management.service.StrategyService;
+import swust.qiy.microservice.management.entity.ApiInfo;
+import swust.qiy.microservice.management.query.ApiInfoQuery;
+import swust.qiy.microservice.management.service.ApiInfoService;
 
 /**
  * @author qiying
  */
-@RequestMapping("/strategy")
+@RequestMapping("/apiInfo")
 @RestController
-public class StrategyController {
+public class ApiInfoController {
 
   @Autowired
-  private StrategyService strategyService;
+  private ApiInfoService apiInfoService;
 
   @RequestMapping("/page")
   @ResponseBody
-  public Result<PageImpl<Strategy>> query(@RequestBody StrategyQuery query) {
-    return strategyService.findPage(query);
+  public Result<PageImpl<ApiInfo>> query(@RequestBody ApiInfoQuery query) {
+    return apiInfoService.findPage(query);
   }
 
   @RequestMapping("/save")
   @ResponseBody
-  public Result save(@RequestBody Strategy strategy) {
-    return strategyService.save(strategy);
+  public Result save(@RequestBody ApiInfo apiInfo) {
+    return apiInfoService.save(apiInfo);
   }
 
   @RequestMapping("/update")
   @ResponseBody
-  public Result update(@RequestBody Strategy strategy) {
-    return strategyService.update(strategy);
+  public Result update(@RequestBody ApiInfo apiInfo) {
+    return apiInfoService.update(apiInfo);
   }
 
   @RequestMapping("/delete")
@@ -49,6 +49,6 @@ public class StrategyController {
     if (CommonUtil.isEmpty(form.getIds())) {
       return ResultUtil.create(ResultCodeEnum.PARAM_ERROR);
     }
-    return strategyService.deleteByIds(form.getIds());
+    return apiInfoService.deleteByIds(form.getIds());
   }
 }
