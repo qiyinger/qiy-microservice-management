@@ -17,6 +17,7 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
   private Integer id;
   private List<Integer> ids;
   private String code;
+  private String allCode;
   private String name;
   private Integer appId;
   private List<Integer> appIds;
@@ -25,6 +26,10 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
   private LocalDateTime createTime;
   private String description;
   private Boolean isDeleted;
+  private Integer userId;
+  private List<Integer> userIds;
+  private Integer systemId;
+  private List<Integer> systemIds;
 
   @Override
   public QueryWrapper<Microservice> toQueryWrapper() {
@@ -38,6 +43,9 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
       if (!CommonUtil.isEmpty(code)) {
       queryWrapper.eq("code", code);
       }
+      if (!CommonUtil.isEmpty(allCode)) {
+      queryWrapper.eq("all_code", allCode);
+      }
       if (!CommonUtil.isEmpty(name)) {
       queryWrapper.eq("name", name);
       }
@@ -45,7 +53,7 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
       queryWrapper.eq("app_id", appId);
       }
       if (!CommonUtil.isEmpty(appIds)) {
-        queryWrapper.in("app_id", appIds);
+      queryWrapper.in("app_id", appIds);
       }
       if (!CommonUtil.isEmpty(startCreateTime)) {
       queryWrapper.ge("create_time", startCreateTime);
@@ -61,6 +69,18 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
       }
       if (!CommonUtil.isEmpty(isDeleted)) {
       queryWrapper.eq("is_deleted", isDeleted);
+      }
+      if (!CommonUtil.isEmpty(userId)) {
+      queryWrapper.eq("user_id", userId);
+      }
+      if (!CommonUtil.isEmpty(userIds)) {
+      queryWrapper.in("user_id", userIds);
+      }
+      if (!CommonUtil.isEmpty(systemId)) {
+      queryWrapper.eq("system_id", systemId);
+      }
+      if (!CommonUtil.isEmpty(systemIds)) {
+      queryWrapper.in("system_id", systemIds);
       }
     return queryWrapper;
   }

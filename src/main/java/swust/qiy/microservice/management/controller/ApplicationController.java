@@ -1,7 +1,9 @@
 package swust.qiy.microservice.management.controller;
 
+import io.swagger.annotations.ApiOperation;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,13 +28,15 @@ public class ApplicationController {
   @Autowired
   private ApplicationService applicationService;
 
-  @RequestMapping("/page")
+  @ApiOperation(value = "分页查询应用信息", httpMethod = "POST")
+  @PostMapping("/page")
   @ResponseBody
   public Result<PageImpl<Application>> query(@RequestBody ApplicationQuery query) {
     return applicationService.findPage(query);
   }
 
-  @RequestMapping("/save")
+  @ApiOperation(value = "保存系统信息", httpMethod = "POST")
+  @PostMapping("/save")
   @ResponseBody
   public Result save(@RequestBody Application application) {
     application.setCreateTime(LocalDateTime.now());
@@ -40,13 +44,15 @@ public class ApplicationController {
     return applicationService.save(application);
   }
 
-  @RequestMapping("/update")
+  @ApiOperation(value = "更新系统信息", httpMethod = "POST")
+  @PostMapping("/update")
   @ResponseBody
   public Result update(@RequestBody Application application) {
     return applicationService.update(application);
   }
 
-  @RequestMapping("/delete")
+  @ApiOperation(value = "删除系统信息", httpMethod = "POST")
+  @PostMapping("/delete")
   @ResponseBody
   public Result delete(@RequestBody BaseForm form) {
     if (CommonUtil.isEmpty(form.getIds())) {

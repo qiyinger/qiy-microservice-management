@@ -6,9 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="accountservice" />
         <module name="microservice-environment-eureka" />
         <module name="microservice-management" />
+        <module name="microservice-sdk" />
+        <module name="shop-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bankservice" target="1.8" />
+      <module name="microservice-sdk" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

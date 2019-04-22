@@ -1,8 +1,6 @@
 package swust.qiy.microservice.management.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import java.time.LocalDateTime;
-import java.util.List;
 import lombok.Data;
 import swust.qiy.microservice.core.query.BaseQuery;
 import swust.qiy.microservice.core.util.CommonUtil;
@@ -66,7 +64,7 @@ public class SystemInfoQuery extends BaseQuery<SystemInfo> {
       queryWrapper.eq("user_id", userId);
       }
       if (!CommonUtil.isEmpty(userIds)) {
-        queryWrapper.in("user_id", userIds);
+      queryWrapper.in("user_id", userIds);
       }
       if (!CommonUtil.isEmpty(userName)) {
       queryWrapper.eq("user_name", userName);

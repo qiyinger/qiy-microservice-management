@@ -15,11 +15,12 @@ public class StrategyIpQuery extends BaseQuery<StrategyIp> {
 
   private Integer id;
   private List<Integer> ids;
+  private String name;
   private Byte type;
+  private String description;
   private String ipList;
-  private String serviceList;
-  private Integer strategyId;
-  private List<Integer> strategyIds;
+  private Integer gatewayId;
+  private List<Integer> gatewayIds;
 
   @Override
   public QueryWrapper<StrategyIp> toQueryWrapper() {
@@ -30,20 +31,23 @@ public class StrategyIpQuery extends BaseQuery<StrategyIp> {
       if (!CommonUtil.isEmpty(ids)) {
       queryWrapper.in("id", ids);
       }
+      if (!CommonUtil.isEmpty(name)) {
+      queryWrapper.eq("name", name);
+      }
       if (!CommonUtil.isEmpty(type)) {
       queryWrapper.eq("type", type);
+      }
+      if (!CommonUtil.isEmpty(description)) {
+      queryWrapper.eq("description", description);
       }
       if (!CommonUtil.isEmpty(ipList)) {
       queryWrapper.eq("ip_list", ipList);
       }
-      if (!CommonUtil.isEmpty(serviceList)) {
-      queryWrapper.eq("service_list", serviceList);
+      if (!CommonUtil.isEmpty(gatewayId)) {
+      queryWrapper.eq("gateway_id", gatewayId);
       }
-      if (!CommonUtil.isEmpty(strategyId)) {
-      queryWrapper.eq("strategy_id", strategyId);
-      }
-      if (!CommonUtil.isEmpty(strategyIds)) {
-        queryWrapper.in("strategy_id", strategyIds);
+      if (!CommonUtil.isEmpty(gatewayIds)) {
+      queryWrapper.in("gateway_id", gatewayIds);
       }
     return queryWrapper;
   }

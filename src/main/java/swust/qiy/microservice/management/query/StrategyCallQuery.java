@@ -15,11 +15,13 @@ public class StrategyCallQuery extends BaseQuery<StrategyCall> {
 
   private Integer id;
   private List<Integer> ids;
-  private Integer timeUnit;
+  private String name;
+  private String description;
+  private Byte timeUnit;
   private Integer timePeriod;
   private Integer rateLimit;
-  private Integer strategyId;
-  private List<Integer> strategyIds;
+  private Integer gatewayId;
+  private List<Integer> gatewayIds;
 
   @Override
   public QueryWrapper<StrategyCall> toQueryWrapper() {
@@ -30,6 +32,12 @@ public class StrategyCallQuery extends BaseQuery<StrategyCall> {
       if (!CommonUtil.isEmpty(ids)) {
       queryWrapper.in("id", ids);
       }
+      if (!CommonUtil.isEmpty(name)) {
+      queryWrapper.eq("name", name);
+      }
+      if (!CommonUtil.isEmpty(description)) {
+      queryWrapper.eq("description", description);
+      }
       if (!CommonUtil.isEmpty(timeUnit)) {
       queryWrapper.eq("time_unit", timeUnit);
       }
@@ -39,11 +47,11 @@ public class StrategyCallQuery extends BaseQuery<StrategyCall> {
       if (!CommonUtil.isEmpty(rateLimit)) {
       queryWrapper.eq("rate_limit", rateLimit);
       }
-      if (!CommonUtil.isEmpty(strategyId)) {
-      queryWrapper.eq("strategy_id", strategyId);
+      if (!CommonUtil.isEmpty(gatewayId)) {
+      queryWrapper.eq("gateway_id", gatewayId);
       }
-      if (!CommonUtil.isEmpty(strategyIds)) {
-        queryWrapper.in("strategy_id", strategyIds);
+      if (!CommonUtil.isEmpty(gatewayIds)) {
+      queryWrapper.in("gateway_id", gatewayIds);
       }
     return queryWrapper;
   }

@@ -1,6 +1,7 @@
 package swust.qiy.microservice.management.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,25 +26,25 @@ public class UserRoleController {
   @Autowired
   private UserRoleService userRoleService;
 
-  @RequestMapping("/page")
+  @PostMapping("/page")
   @ResponseBody
   public Result<PageImpl<UserRole>> query(@RequestBody UserRoleQuery query) {
     return userRoleService.findPage(query);
   }
 
-  @RequestMapping("/save")
+  @PostMapping("/save")
   @ResponseBody
   public Result save(@RequestBody UserRole userRole) {
     return userRoleService.save(userRole);
   }
 
-  @RequestMapping("/update")
+  @PostMapping("/update")
   @ResponseBody
   public Result update(@RequestBody UserRole userRole) {
     return userRoleService.update(userRole);
   }
 
-  @RequestMapping("/delete")
+  @PostMapping("/delete")
   @ResponseBody
   public Result delete(@RequestBody BaseForm form) {
     if (CommonUtil.isEmpty(form.getIds())) {

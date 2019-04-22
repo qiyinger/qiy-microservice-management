@@ -51,7 +51,7 @@ public class GatewayQuery extends BaseQuery<Gateway> {
       queryWrapper.eq("system_id", systemId);
       }
       if (!CommonUtil.isEmpty(systemIds)) {
-        queryWrapper.in("system_id", systemIds);
+      queryWrapper.in("system_id", systemIds);
       }
     return queryWrapper;
   }

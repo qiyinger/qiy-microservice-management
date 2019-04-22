@@ -17,6 +17,7 @@ public class ApplicationQuery extends BaseQuery<Application> {
   private Integer id;
   private List<Integer> ids;
   private String code;
+  private String allCode;
   private String name;
   private LocalDateTime startCreateTime;
   private LocalDateTime endCreateTime;
@@ -27,6 +28,8 @@ public class ApplicationQuery extends BaseQuery<Application> {
   private List<Integer> systemIds;
   private Boolean isDeleted;
   private Byte status;
+  private Integer userId;
+  private List<Integer> userIds;
 
   @Override
   public QueryWrapper<Application> toQueryWrapper() {
@@ -39,6 +42,9 @@ public class ApplicationQuery extends BaseQuery<Application> {
       }
       if (!CommonUtil.isEmpty(code)) {
       queryWrapper.eq("code", code);
+      }
+      if (!CommonUtil.isEmpty(allCode)) {
+      queryWrapper.eq("all_code", allCode);
       }
       if (!CommonUtil.isEmpty(name)) {
       queryWrapper.eq("name", name);
@@ -62,13 +68,19 @@ public class ApplicationQuery extends BaseQuery<Application> {
       queryWrapper.eq("system_id", systemId);
       }
       if (!CommonUtil.isEmpty(systemIds)) {
-        queryWrapper.in("system_id", systemIds);
+      queryWrapper.in("system_id", systemIds);
       }
       if (!CommonUtil.isEmpty(isDeleted)) {
       queryWrapper.eq("is_deleted", isDeleted);
       }
       if (!CommonUtil.isEmpty(status)) {
       queryWrapper.eq("status", status);
+      }
+      if (!CommonUtil.isEmpty(userId)) {
+      queryWrapper.eq("user_id", userId);
+      }
+      if (!CommonUtil.isEmpty(userIds)) {
+      queryWrapper.in("user_id", userIds);
       }
     return queryWrapper;
   }

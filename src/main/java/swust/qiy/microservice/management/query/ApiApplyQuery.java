@@ -33,51 +33,51 @@ public class ApiApplyQuery extends BaseQuery<ApiApply> {
   @Override
   public QueryWrapper<ApiApply> toQueryWrapper() {
     QueryWrapper<ApiApply> queryWrapper = new QueryWrapper<>();
-    if (!CommonUtil.isEmpty(id)) {
+      if (!CommonUtil.isEmpty(id)) {
       queryWrapper.eq("id", id);
-    }
-    if (!CommonUtil.isEmpty(ids)) {
+      }
+      if (!CommonUtil.isEmpty(ids)) {
       queryWrapper.in("id", ids);
-    }
-    if (!CommonUtil.isEmpty(applicant)) {
+      }
+      if (!CommonUtil.isEmpty(applicant)) {
       queryWrapper.eq("applicant", applicant);
-    }
-    if (!CommonUtil.isEmpty(status)) {
+      }
+      if (!CommonUtil.isEmpty(status)) {
       queryWrapper.eq("status", status);
-    }
-    if (!CommonUtil.isEmpty(type)) {
+      }
+      if (!CommonUtil.isEmpty(type)) {
       queryWrapper.eq("type", type);
-    }
-    if (!CommonUtil.isEmpty(startApplyTime)) {
+      }
+      if (!CommonUtil.isEmpty(startApplyTime)) {
       queryWrapper.ge("apply_time", startApplyTime);
-    }
-    if (!CommonUtil.isEmpty(endApplyTime)) {
+      }
+      if (!CommonUtil.isEmpty(endApplyTime)) {
       queryWrapper.le("apply_time", endApplyTime);
-    }
-    if (!CommonUtil.isEmpty(applyTime)) {
+      }
+      if (!CommonUtil.isEmpty(applyTime)) {
       queryWrapper.eq("apply_time", applyTime);
-    }
-    if (!CommonUtil.isEmpty(description)) {
+      }
+      if (!CommonUtil.isEmpty(description)) {
       queryWrapper.eq("description", description);
-    }
-    if (!CommonUtil.isEmpty(auditorName)) {
+      }
+      if (!CommonUtil.isEmpty(auditorName)) {
       queryWrapper.eq("auditor_name", auditorName);
-    }
-    if (!CommonUtil.isEmpty(asId)) {
+      }
+      if (!CommonUtil.isEmpty(asId)) {
       queryWrapper.eq("as_id", asId);
-    }
-    if (!CommonUtil.isEmpty(asIds)) {
+      }
+      if (!CommonUtil.isEmpty(asIds)) {
       queryWrapper.in("as_id", asIds);
-    }
-    if (!CommonUtil.isEmpty(startModifyTime)) {
+      }
+      if (!CommonUtil.isEmpty(startModifyTime)) {
       queryWrapper.ge("modify_time", startModifyTime);
-    }
-    if (!CommonUtil.isEmpty(endModifyTime)) {
+      }
+      if (!CommonUtil.isEmpty(endModifyTime)) {
       queryWrapper.le("modify_time", endModifyTime);
-    }
-    if (!CommonUtil.isEmpty(modifyTime)) {
+      }
+      if (!CommonUtil.isEmpty(modifyTime)) {
       queryWrapper.eq("modify_time", modifyTime);
-    }
+      }
     return queryWrapper;
   }
 }

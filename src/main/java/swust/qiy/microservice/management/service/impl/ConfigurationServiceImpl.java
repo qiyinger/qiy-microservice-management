@@ -9,6 +9,7 @@ import swust.qiy.microservice.management.service.ConfigurationService;
  * @author qiying
  */
 @Service
-public class ConfigurationServiceImpl extends BaseServiceImpl<Configuration> implements ConfigurationService {
+public class ConfigurationServiceImpl extends BaseServiceImpl<Configuration> implements
+  ConfigurationService {
 
 }

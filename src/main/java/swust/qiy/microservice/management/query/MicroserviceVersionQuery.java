@@ -61,7 +61,7 @@ public class MicroserviceVersionQuery extends BaseQuery<MicroserviceVersion> {
       queryWrapper.eq("microservice_id", microserviceId);
       }
       if (!CommonUtil.isEmpty(microserviceIds)) {
-        queryWrapper.in("microservice_id", microserviceIds);
+      queryWrapper.in("microservice_id", microserviceIds);
       }
       if (!CommonUtil.isEmpty(isDeleted)) {
       queryWrapper.eq("is_deleted", isDeleted);

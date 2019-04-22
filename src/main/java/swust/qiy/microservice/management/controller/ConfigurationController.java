@@ -1,6 +1,7 @@
 package swust.qiy.microservice.management.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,25 +26,25 @@ public class ConfigurationController {
   @Autowired
   private ConfigurationService configurationService;
 
-  @RequestMapping("/page")
+  @PostMapping("/page")
   @ResponseBody
   public Result<PageImpl<Configuration>> query(@RequestBody ConfigurationQuery query) {
     return configurationService.findPage(query);
   }
 
-  @RequestMapping("/save")
+  @PostMapping("/save")
   @ResponseBody
   public Result save(@RequestBody Configuration configuration) {
     return configurationService.save(configuration);
   }
 
-  @RequestMapping("/update")
+  @PostMapping("/update")
   @ResponseBody
   public Result update(@RequestBody Configuration configuration) {
     return configurationService.update(configuration);
   }
 
-  @RequestMapping("/delete")
+  @PostMapping("/delete")
   @ResponseBody
   public Result delete(@RequestBody BaseForm form) {
     if (CommonUtil.isEmpty(form.getIds())) {

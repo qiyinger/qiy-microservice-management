@@ -39,7 +39,7 @@ public class ConfigurationQuery extends BaseQuery<Configuration> {
       queryWrapper.eq("apollo_app_id", apolloAppId);
       }
       if (!CommonUtil.isEmpty(apolloAppIds)) {
-        queryWrapper.in("apollo_app_id", apolloAppIds);
+      queryWrapper.in("apollo_app_id", apolloAppIds);
       }
       if (!CommonUtil.isEmpty(apolloClusterName)) {
       queryWrapper.eq("apollo_cluster_name", apolloClusterName);
@@ -51,7 +51,7 @@ public class ConfigurationQuery extends BaseQuery<Configuration> {
       queryWrapper.eq("service_version_id", serviceVersionId);
       }
       if (!CommonUtil.isEmpty(serviceVersionIds)) {
-        queryWrapper.in("service_version_id", serviceVersionIds);
+      queryWrapper.in("service_version_id", serviceVersionIds);
       }
     return queryWrapper;
   }

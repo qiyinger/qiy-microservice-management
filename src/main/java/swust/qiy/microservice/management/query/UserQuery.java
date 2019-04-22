@@ -39,7 +39,7 @@ public class UserQuery extends BaseQuery<User> {
       queryWrapper.eq("role_id", roleId);
       }
       if (!CommonUtil.isEmpty(roleIds)) {
-        queryWrapper.in("role_id", roleIds);
+      queryWrapper.in("role_id", roleIds);
       }
     return queryWrapper;
   }

@@ -24,11 +24,17 @@ public class RouteQuery extends BaseQuery<Route> {
   private LocalDateTime endUpdateTime;
   private LocalDateTime updateTime;
   private String description;
-  private Boolean active;
+  private Byte status;
   private Integer gatewayId;
   private List<Integer> gatewayIds;
-  private String yml;
-  private String rule;
+  private Byte bindType;
+  private Integer bindId;
+  private List<Integer> bindIds;
+  private String code;
+  private String uri;
+  private String filters;
+  private String predicates;
+  private Integer priority;
 
   @Override
   public QueryWrapper<Route> toQueryWrapper() {
@@ -63,20 +69,38 @@ public class RouteQuery extends BaseQuery<Route> {
       if (!CommonUtil.isEmpty(description)) {
       queryWrapper.eq("description", description);
       }
-      if (!CommonUtil.isEmpty(active)) {
-      queryWrapper.eq("active", active);
+      if (!CommonUtil.isEmpty(status)) {
+      queryWrapper.eq("status", status);
       }
       if (!CommonUtil.isEmpty(gatewayId)) {
       queryWrapper.eq("gateway_id", gatewayId);
       }
       if (!CommonUtil.isEmpty(gatewayIds)) {
-        queryWrapper.in("gateway_id", gatewayIds);
+      queryWrapper.in("gateway_id", gatewayIds);
       }
-      if (!CommonUtil.isEmpty(yml)) {
-      queryWrapper.eq("yml", yml);
+      if (!CommonUtil.isEmpty(bindType)) {
+      queryWrapper.eq("bind_type", bindType);
       }
-      if (!CommonUtil.isEmpty(rule)) {
-      queryWrapper.eq("rule", rule);
+      if (!CommonUtil.isEmpty(bindId)) {
+      queryWrapper.eq("bind_id", bindId);
+      }
+      if (!CommonUtil.isEmpty(bindIds)) {
+      queryWrapper.in("bind_id", bindIds);
+      }
+      if (!CommonUtil.isEmpty(code)) {
+      queryWrapper.eq("code", code);
+      }
+      if (!CommonUtil.isEmpty(uri)) {
+      queryWrapper.eq("uri", uri);
+      }
+      if (!CommonUtil.isEmpty(filters)) {
+      queryWrapper.eq("filters", filters);
+      }
+      if (!CommonUtil.isEmpty(predicates)) {
+      queryWrapper.eq("predicates", predicates);
+      }
+      if (!CommonUtil.isEmpty(priority)) {
+      queryWrapper.eq("order", priority);
       }
     return queryWrapper;
   }

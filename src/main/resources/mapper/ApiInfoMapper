@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="swust.qiy.microservice.management.dao.ApiInfoDao">
+  <insert id="saveOrUpdateBatch" parameterType="java.util.List">
+    INSERT INTO api_info
+      (   name,
+          protocol,
+          method,
+          path,
+          description,
+          type,
+          status,
+          invalid,
+          serviceVersionId,
+          microserviceId
+      )
+   <foreach collection="coll" item="item" separator=",">
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      #{item.name},
+      #{item.protocol},
+      #{item.method},#{item.path},#{item.description},#{item.type},#{item.status},#{item.invalid},#{item.serviceVersionId},#{item.microserviceId}
+    </trim>
+  </foreach>
+   ON DUPLICATE KEY UPDATE
+    name = values(name),
+    protocol = values(protocol),
+    method = values(method),
+    path = values(path),
+    description = values(description),
+    type = values(type),
+    status = values(status),
+    invalid = values(invalid)
+    serviceVersionId = values(serviceVersionId)
+    microserviceId = values(microserviceId)
+  </insert>
+</mapper>

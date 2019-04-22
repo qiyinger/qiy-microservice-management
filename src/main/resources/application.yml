@@ -21,14 +21,36 @@ mybatis-plus:
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
       id-type: auto
-#
-#eureka:
-#  instance:
-#    hostname: localhost
-#  client:
-#    fetch-registry: true
-#    register-with-eureka: true
-#    service-url:
-#      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
 
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
 
+  #namesrvAddr地址
+  qiy:
+    rocketmq:
+      namesrvAddr: 0.0.0.0:9876
+  #生产者group名称
+      producerGroupName: microserviceProducer
+  #消费者group名称
+      consumerGroupName: microserviceConsumer
+  #生产者实例名称
+      producerInstanceName: producerInstanceName
+ # 消费者实例名称
+      consumerInstanceName: consumerInstanceName
+  #一次最大消费多少数量消息
+      consumerBatchMaxSize: 1
+  #广播消费
+      consumerBroadcasting: false
+  #消费的topic：tag
+      subscribe:
+        - Gateway:route
+ # 启动的时候是否消费历史记录
+      enableHisConsumer: false
+ # 启动顺序消费
+      enableOrderConsumer: true

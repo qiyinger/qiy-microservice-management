@@ -9,6 +9,7 @@ import swust.qiy.microservice.management.service.PlatformConfigService;
  * @author qiying
  */
 @Service
-public class PlatformConfigServiceImpl extends BaseServiceImpl<PlatformConfig> implements PlatformConfigService {
+public class PlatformConfigServiceImpl extends BaseServiceImpl<PlatformConfig> implements
+  PlatformConfigService {
 
 }

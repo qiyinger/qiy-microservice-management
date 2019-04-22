@@ -25,11 +25,8 @@ public class ApiInfoQuery extends BaseQuery<ApiInfo> {
   private Boolean invalid;
   private Integer serviceVersionId;
   private List<Integer> serviceVersionIds;
-  private String header;
-  private String parameters;
-  private String returnInfo;
-  private String typeObj;
-  private String errorCode;
+  private Integer microserviceId;
+  private List<Integer> microserviceIds;
 
   @Override
   public QueryWrapper<ApiInfo> toQueryWrapper() {
@@ -68,22 +65,13 @@ public class ApiInfoQuery extends BaseQuery<ApiInfo> {
       queryWrapper.eq("service_version_id", serviceVersionId);
       }
       if (!CommonUtil.isEmpty(serviceVersionIds)) {
-        queryWrapper.in("service_version_id", serviceVersionIds);
+      queryWrapper.in("service_version_id", serviceVersionIds);
       }
-      if (!CommonUtil.isEmpty(header)) {
-      queryWrapper.eq("header", header);
+      if (!CommonUtil.isEmpty(microserviceId)) {
+      queryWrapper.eq("microservice_id", microserviceId);
       }
-      if (!CommonUtil.isEmpty(parameters)) {
-      queryWrapper.eq("parameters", parameters);
-      }
-      if (!CommonUtil.isEmpty(returnInfo)) {
-      queryWrapper.eq("return_info", returnInfo);
-      }
-      if (!CommonUtil.isEmpty(typeObj)) {
-      queryWrapper.eq("type_obj", typeObj);
-      }
-      if (!CommonUtil.isEmpty(errorCode)) {
-      queryWrapper.eq("error_code", errorCode);
+      if (!CommonUtil.isEmpty(microserviceIds)) {
+      queryWrapper.in("microservice_id", microserviceIds);
       }
     return queryWrapper;
   }

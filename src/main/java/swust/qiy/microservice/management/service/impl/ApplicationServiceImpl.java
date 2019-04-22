@@ -1,7 +1,6 @@
 package swust.qiy.microservice.management.service.impl;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import swust.qiy.microservice.core.constant.StatusConstant;
@@ -37,9 +36,9 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Application>
     if (CommonUtil.isEmpty(model.getCode())) {
       return ResultUtil.create(ResultCodeEnum.PARAM_ERROR, "应用编号不能为空");
     }
-    model.setCode(systemInfo.getCode() + "-" + model.getCode());
-    model.setCreateTime(LocalDateTime.now());
+    model.setAllCode(systemInfo.getCode() + "-" + model.getCode());
     model.setStatus(StatusConstant.DISABLE);
+    model.setCreateTime(LocalDateTime.now());
     return super.save(model);
   }
 }

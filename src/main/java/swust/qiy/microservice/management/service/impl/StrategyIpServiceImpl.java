@@ -9,6 +9,7 @@ import swust.qiy.microservice.management.service.StrategyIpService;
  * @author qiying
  */
 @Service
-public class StrategyIpServiceImpl extends BaseServiceImpl<StrategyIp> implements StrategyIpService {
+public class StrategyIpServiceImpl extends BaseServiceImpl<StrategyIp> implements
+  StrategyIpService {
 
 }
