@@ -2,7 +2,6 @@ package swust.qiy.microservice.management.controller;
 
 import com.netflix.appinfo.InstanceInfo;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
@@ -11,17 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient.EurekaServiceInstance;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import swust.qiy.microservice.core.enums.ResultCodeEnum;
 import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.core.result.ResultUtil;
 import swust.qiy.microservice.core.util.HttpClientUtil;
+import swust.qiy.microservice.management.controller.from.instance.InstanceSeachForm;
 import swust.qiy.microservice.management.controller.from.instance.InstanceShutdownForm;
 import swust.qiy.microservice.management.controller.vo.InstanceVO;
 import swust.qiy.microservice.management.entity.Microservice;
@@ -51,11 +49,13 @@ public class ServiceInstanceController {
    * 获取实例列表
    */
   @ApiOperation(value = "获取实例列表", httpMethod = "GET")
-  @GetMapping("/instance/list")
+  @PostMapping("/instance/list")
   @ResponseBody
-  public Result getInstances(
-    @ApiParam(required = true, value = "微服务版本ID") @RequestParam("versionId") Integer versionId) {
-    MicroserviceVersion microserviceVersion = microserviceVersionService.findById(versionId)
+  public Result getInstances(@RequestBody InstanceSeachForm form) {
+    if (form.getVersionId() == null) {
+      return ResultUtil.create(ResultCodeEnum.PARAM_ERROR, "版本号Id不能为空");
+    }
+    MicroserviceVersion microserviceVersion = microserviceVersionService.findById(form.getVersionId())
       .getData();
     if (microserviceVersion == null) {
       return ResultUtil.create(ResultCodeEnum.RECORD_NOT_EXIST);

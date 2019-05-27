@@ -2,6 +2,7 @@ package swust.qiy.microservice.management.controller.from.route;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -24,19 +25,16 @@ public class RouteUpdateForm {
   @ApiModelProperty(required = true, value = "路由编码")
   private String code;
 
-  @ApiModelProperty(required = true, value = "路由地址")
-  private String uri;
-
   @ApiModelProperty(required = false, value = "过滤器")
-  private String filters;
+  private List<String> filters;
 
   @ApiModelProperty(required = false, value = "断言工厂")
-  private String predicates;
+  private List<String> predicates;
 
   @ApiModelProperty(required = false, value = "优先级")
   private Integer priority;
 
   @ApiModelProperty(required = true, value = "是否动态刷新路由")
-  private Boolean publish;
+  private Boolean publish = false;
 
 }

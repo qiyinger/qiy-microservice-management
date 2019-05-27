@@ -2,14 +2,10 @@ package swust.qiy.microservice.management.entity;
 
 import java.time.LocalDateTime;
 import lombok.Data;
-import swust.qiy.microservice.core.constant.StatusConstant;
 
 @Data
 public class ApiApply {
 
-  /**
-   * 唯一标识
-   */
   private Integer id;
 
   /**
@@ -18,9 +14,9 @@ public class ApiApply {
   private String applicant;
 
   /**
-   * 审核状态,0:打回;1:等待审核;2:通过
+   * 审核状态,0:等待审核;1:通过;2:打回
    */
-  private Byte status = StatusConstant.CHECK_PENDING;
+  private Byte status;
 
   /**
    * 申请类型:service(微服务),api(接口)
@@ -51,5 +47,15 @@ public class ApiApply {
    * 修改时间
    */
   private LocalDateTime modifyTime;
+
+  /**
+   * 系统id
+   */
+  private Integer systemId;
+
+  /**
+   * 版本id
+   */
+  private Integer serviceVersionId;
 
 }

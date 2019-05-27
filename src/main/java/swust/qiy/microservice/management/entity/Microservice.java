@@ -19,11 +19,6 @@ public class Microservice {
   private String code;
 
   /**
-   * 微服务完整编码
-   */
-  private String allCode;
-
-  /**
    * 微服务名称
    */
   private String name;
@@ -59,5 +54,9 @@ public class Microservice {
    */
   private Integer systemId;
 
+  /**
+   * 配置中心token
+   */
+  private String token;
 
 }

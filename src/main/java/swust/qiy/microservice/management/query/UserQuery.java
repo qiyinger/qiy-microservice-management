@@ -15,7 +15,7 @@ public class UserQuery extends BaseQuery<User> {
 
   private Integer id;
   private List<Integer> ids;
-  private String name;
+  private String username;
   private String password;
   private Integer roleId;
   private List<Integer> roleIds;
@@ -29,8 +29,8 @@ public class UserQuery extends BaseQuery<User> {
       if (!CommonUtil.isEmpty(ids)) {
       queryWrapper.in("id", ids);
       }
-      if (!CommonUtil.isEmpty(name)) {
-      queryWrapper.eq("name", name);
+      if (!CommonUtil.isEmpty(username)) {
+      queryWrapper.eq("username", username);
       }
       if (!CommonUtil.isEmpty(password)) {
       queryWrapper.eq("password", password);

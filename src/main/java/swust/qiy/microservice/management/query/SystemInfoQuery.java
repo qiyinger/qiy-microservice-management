@@ -1,6 +1,8 @@
 package swust.qiy.microservice.management.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Data;
 import swust.qiy.microservice.core.query.BaseQuery;
 import swust.qiy.microservice.core.util.CommonUtil;
@@ -16,7 +18,6 @@ public class SystemInfoQuery extends BaseQuery<SystemInfo> {
   private List<Integer> ids;
   private String code;
   private String name;
-  private Byte status;
   private LocalDateTime startCreateTime;
   private LocalDateTime endCreateTime;
   private LocalDateTime createTime;
@@ -24,7 +25,6 @@ public class SystemInfoQuery extends BaseQuery<SystemInfo> {
   private String rsskey;
   private Integer userId;
   private List<Integer> userIds;
-  private String userName;
   private Boolean isDeleted;
 
   @Override
@@ -41,9 +41,6 @@ public class SystemInfoQuery extends BaseQuery<SystemInfo> {
       }
       if (!CommonUtil.isEmpty(name)) {
       queryWrapper.eq("name", name);
-      }
-      if (!CommonUtil.isEmpty(status)) {
-      queryWrapper.eq("status", status);
       }
       if (!CommonUtil.isEmpty(startCreateTime)) {
       queryWrapper.ge("create_time", startCreateTime);
@@ -65,9 +62,6 @@ public class SystemInfoQuery extends BaseQuery<SystemInfo> {
       }
       if (!CommonUtil.isEmpty(userIds)) {
       queryWrapper.in("user_id", userIds);
-      }
-      if (!CommonUtil.isEmpty(userName)) {
-      queryWrapper.eq("user_name", userName);
       }
       if (!CommonUtil.isEmpty(isDeleted)) {
       queryWrapper.eq("is_deleted", isDeleted);

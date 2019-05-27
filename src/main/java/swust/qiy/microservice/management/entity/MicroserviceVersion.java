@@ -8,9 +8,6 @@ import lombok.Data;
 @Data
 public class MicroserviceVersion {
 
-  /**
-   * 唯一标识
-   */
   private Integer id;
 
   /**
@@ -19,14 +16,9 @@ public class MicroserviceVersion {
   private String version;
 
   /**
-   * 实例数
+   * 上线状态, 0:未上线；1：已上线
    */
-  private Integer numOfInst;
-
-  /**
-   * 上线状态, 0:待上线;1:已上线;2:已下线
-   */
-  private Byte onlineStatus;
+  private Boolean online;
 
   /**
    * 创建时间
@@ -42,6 +34,16 @@ public class MicroserviceVersion {
    * 微服务标识
    */
   private Integer microserviceId;
+
+  /**
+   * 是否已创建配置
+   */
+  private Boolean configurated;
+
+  /**
+   * 发布状态，0：未发布；1：已发布
+   */
+  private Boolean publish;
 
   /**
    * 逻辑删除标识, 0:未删除;1:已删除

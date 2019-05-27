@@ -1,14 +1,12 @@
 package swust.qiy.microservice.management.entity;
 
 import lombok.Data;
-import swust.qiy.microservice.core.constant.StatusConstant;
+import org.springframework.data.annotation.Id;
 
 @Data
 public class Gateway {
 
-  /**
-   * 唯一标识
-   */
+  @Id
   private Integer id;
 
   /**
@@ -27,9 +25,9 @@ public class Gateway {
   private String description;
 
   /**
-   * 状态:ON、OFF
+   * 状态:PAUSE、ON、OFF
    */
-  private Byte status = StatusConstant.DISABLE;
+  private Byte status;
 
   /**
    * 系统标识
@@ -37,7 +35,7 @@ public class Gateway {
   private Integer systemId;
 
   /**
-   * 网关完整编码
+   * 全称
    */
   private String allCode;
 

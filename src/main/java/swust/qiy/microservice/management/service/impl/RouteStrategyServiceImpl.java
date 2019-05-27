@@ -2,15 +2,13 @@ package swust.qiy.microservice.management.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.rocketmq.client.exception.MQBrokerException;
-import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.remoting.exception.RemotingException;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import swust.qiy.microservice.core.constant.StatusConstant;
 import swust.qiy.microservice.core.result.Result;
 import swust.qiy.microservice.core.result.ResultUtil;
 import swust.qiy.microservice.core.service.impl.BaseServiceImpl;
+import swust.qiy.microservice.management.MsgSender;
 import swust.qiy.microservice.management.dao.RouteDao;
 import swust.qiy.microservice.management.dao.RouteStrategyDao;
 import swust.qiy.microservice.management.dao.StrategyCallDao;
@@ -19,7 +17,6 @@ import swust.qiy.microservice.management.entity.Route;
 import swust.qiy.microservice.management.entity.RouteStrategy;
 import swust.qiy.microservice.management.message.RateLimitMessage;
 import swust.qiy.microservice.management.service.RouteStrategyService;
-import swust.qiy.microservice.sdk.mq.MsgSender;
 
 /**
  * @author qiying
@@ -28,15 +25,15 @@ import swust.qiy.microservice.sdk.mq.MsgSender;
 public class RouteStrategyServiceImpl extends BaseServiceImpl<RouteStrategy> implements
   RouteStrategyService {
 
-  @Autowired
+  @Resource
   private StrategyIpDao strategyIpDao;
-  @Autowired
+  @Resource
   private StrategyCallDao strategyCallDao;
-  @Autowired
+  @Resource
   private RouteStrategyDao routeStrategyDao;
-  @Autowired
+  @Resource
   private RouteDao routeDao;
-  @Autowired
+  @Resource
   private MsgSender msgSender;
 
   @Override
@@ -50,8 +47,8 @@ public class RouteStrategyServiceImpl extends BaseServiceImpl<RouteStrategy> imp
       .map(strategyId -> new RouteStrategy(routeId, strategyId, StatusConstant.STRATEGY_CALL))
       .collect(Collectors.toList());
     routeStrategyDao.saveOrUpdateBatch(needSaveList);
-    if (routeInfo.getStatus() == StatusConstant.PUBLISHED
-      || routeInfo.getStatus() == StatusConstant.PUBLISH_STARTING) {
+    if (routeInfo.getPublish() == StatusConstant.PUBLISHED
+      || routeInfo.getPublish() == StatusConstant.PUBLISH_STARTING) {
       try {
         msgSender.sendMsg(new RateLimitMessage(routeInfo.getId().toString(), "RELOAD"));
       } catch (Exception e) {

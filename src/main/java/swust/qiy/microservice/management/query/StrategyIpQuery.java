@@ -21,6 +21,8 @@ public class StrategyIpQuery extends BaseQuery<StrategyIp> {
   private String ipList;
   private Integer gatewayId;
   private List<Integer> gatewayIds;
+  private Integer routeId;
+  private List<Integer> routeIds;
 
   @Override
   public QueryWrapper<StrategyIp> toQueryWrapper() {
@@ -48,6 +50,12 @@ public class StrategyIpQuery extends BaseQuery<StrategyIp> {
       }
       if (!CommonUtil.isEmpty(gatewayIds)) {
       queryWrapper.in("gateway_id", gatewayIds);
+      }
+      if (!CommonUtil.isEmpty(routeId)) {
+      queryWrapper.eq("route_id", routeId);
+      }
+      if (!CommonUtil.isEmpty(routeIds)) {
+      queryWrapper.in("route_id", routeIds);
       }
     return queryWrapper;
   }

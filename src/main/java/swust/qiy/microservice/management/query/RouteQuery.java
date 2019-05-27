@@ -24,12 +24,11 @@ public class RouteQuery extends BaseQuery<Route> {
   private LocalDateTime endUpdateTime;
   private LocalDateTime updateTime;
   private String description;
-  private Byte status;
+  private Byte publish;
   private Integer gatewayId;
   private List<Integer> gatewayIds;
-  private Byte bindType;
-  private Integer bindId;
-  private List<Integer> bindIds;
+  private Integer bindServiceId;
+  private List<Integer> bindServiceIds;
   private String code;
   private String uri;
   private String filters;
@@ -69,8 +68,8 @@ public class RouteQuery extends BaseQuery<Route> {
       if (!CommonUtil.isEmpty(description)) {
       queryWrapper.eq("description", description);
       }
-      if (!CommonUtil.isEmpty(status)) {
-      queryWrapper.eq("status", status);
+      if (!CommonUtil.isEmpty(publish)) {
+      queryWrapper.eq("publish", publish);
       }
       if (!CommonUtil.isEmpty(gatewayId)) {
       queryWrapper.eq("gateway_id", gatewayId);
@@ -78,14 +77,11 @@ public class RouteQuery extends BaseQuery<Route> {
       if (!CommonUtil.isEmpty(gatewayIds)) {
       queryWrapper.in("gateway_id", gatewayIds);
       }
-      if (!CommonUtil.isEmpty(bindType)) {
-      queryWrapper.eq("bind_type", bindType);
+      if (!CommonUtil.isEmpty(bindServiceId)) {
+      queryWrapper.eq("bind_service_id", bindServiceId);
       }
-      if (!CommonUtil.isEmpty(bindId)) {
-      queryWrapper.eq("bind_id", bindId);
-      }
-      if (!CommonUtil.isEmpty(bindIds)) {
-      queryWrapper.in("bind_id", bindIds);
+      if (!CommonUtil.isEmpty(bindServiceIds)) {
+      queryWrapper.in("bind_service_id", bindServiceIds);
       }
       if (!CommonUtil.isEmpty(code)) {
       queryWrapper.eq("code", code);
@@ -100,7 +96,7 @@ public class RouteQuery extends BaseQuery<Route> {
       queryWrapper.eq("predicates", predicates);
       }
       if (!CommonUtil.isEmpty(priority)) {
-      queryWrapper.eq("order", priority);
+      queryWrapper.eq("priority", priority);
       }
     return queryWrapper;
   }

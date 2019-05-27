@@ -24,11 +24,6 @@ public class SystemInfo {
   private String name;
 
   /**
-   * 是否启用, 0:未启用 1:已启用
-   */
-  private Byte status;
-
-  /**
    * 创建时间
    */
   private LocalDateTime createTime;
@@ -47,11 +42,6 @@ public class SystemInfo {
    * 所属用户
    */
   private Integer userId;
-
-  /**
-   * 用户名
-   */
-  private String userName;
 
   /**
    * 逻辑删除标识, 0:未删除;1:已删除

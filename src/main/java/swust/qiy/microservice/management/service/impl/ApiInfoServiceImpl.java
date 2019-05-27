@@ -10,18 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
+import javax.annotation.Resource;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient.EurekaServiceInstance;
 import org.springframework.stereotype.Service;
-import swust.qiy.microservice.core.constant.StatusConstant;
+import org.springframework.web.bind.annotation.RequestBody;
 import swust.qiy.microservice.core.enums.ResultCodeEnum;
 import swust.qiy.microservice.core.result.Result;
+import swust.qiy.microservice.core.result.ResultAsset;
 import swust.qiy.microservice.core.result.ResultUtil;
 import swust.qiy.microservice.core.service.impl.BaseServiceImpl;
 import swust.qiy.microservice.core.util.HttpClientUtil;
 import swust.qiy.microservice.core.util.StringUtil;
+import swust.qiy.microservice.management.controller.from.instance.InstanceSeachForm;
+import swust.qiy.microservice.management.controller.vo.InstanceVO;
 import swust.qiy.microservice.management.dao.ApiInfoDao;
+import swust.qiy.microservice.management.dao.MicroserviceDao;
 import swust.qiy.microservice.management.dao.MicroserviceVersionDao;
 import swust.qiy.microservice.management.entity.ApiInfo;
+import swust.qiy.microservice.management.entity.Microservice;
 import swust.qiy.microservice.management.entity.MicroserviceVersion;
 import swust.qiy.microservice.management.service.ApiInfoService;
 
@@ -31,10 +43,15 @@ import swust.qiy.microservice.management.service.ApiInfoService;
 @Service
 public class ApiInfoServiceImpl extends BaseServiceImpl<ApiInfo> implements ApiInfoService {
 
-  @Autowired
+  @Resource
   private ApiInfoDao apiInfoDao;
-  @Autowired
+  @Resource
   private MicroserviceVersionDao microserviceVersionDao;
+  @Resource
+  private MicroserviceDao microserviceDao;
+  @Resource
+  private EurekaDiscoveryClient discoveryClient;
+
   private HttpClientUtil httpClientUtil = new HttpClientUtil();
 
   private String PROTOCOL = "Http";
@@ -43,10 +60,11 @@ public class ApiInfoServiceImpl extends BaseServiceImpl<ApiInfo> implements ApiI
   @Override
   public Result<Integer> importApi(String url, Integer serviceVersionId) {
     MicroserviceVersion version = microserviceVersionDao.selectById(serviceVersionId);
-    if (version == null) {
-      return ResultUtil.create(ResultCodeEnum.RECORD_NOT_EXIST);
+    ResultAsset.notNull(version, ResultCodeEnum.RECORD_NOT_EXIST, "版本Id错误");
+    if (StringUtils.isBlank(url)) {
+      url = getUrl(version);
     }
-    String content = httpClientUtil.doGet(url);
+    String content = HttpClientUtil.doGet(url);
     Swagger swagger = null;
     try {
       swagger = new Swagger20Parser().parse(content);
@@ -68,40 +86,30 @@ public class ApiInfoServiceImpl extends BaseServiceImpl<ApiInfo> implements ApiI
 
   }
 
+  private String getUrl(MicroserviceVersion version) {
+    Microservice microservice = microserviceDao.selectById(version.getMicroserviceId());
+    List<ServiceInstance> list = discoveryClient.getInstances(microservice.getCode());
+    List<InstanceVO> vos = list.stream()
+      .filter(instance -> version.getVersion()
+        .equals(instance.getMetadata().get("qiy.service.version")))
+      .map(serviceInstance -> new InstanceVO((EurekaServiceInstance) serviceInstance))
+      .collect(Collectors.toList());
+    ResultAsset.notEmpty(vos, ResultCodeEnum.RECORD_EXIST, "该版本没有实例运行");
+    return vos.get(0).getHomePageUrl() + "swagger-ui.html";
+  }
+
   private ApiInfo createApiInfo(Operation operation, String methodObjName,
     MicroserviceVersion version,
     String fullPath, Swagger swagger) {
     ApiInfo api = new ApiInfo();
     api.setServiceVersionId(version.getId());
     api.setMicroserviceId(version.getMicroserviceId());
-    api.setStatus(StatusConstant.DISABLE);
+    api.setInvalid(false);
     api.setProtocol(PROTOCOL);
     api.setPath(fullPath);
     api.setName(operation.getSummary());
     api.setDescription(operation.getDescription());
     api.setMethod(methodObjName);
-    api.setType(StatusConstant.INTRANET);
-
     return api;
-  }
-
-  @Override
-  public Result online(Integer id) {
-    ApiInfo apiInfo = apiInfoDao.selectById(id);
-    if (StatusConstant.PENDING_STARTED != apiInfo.getStatus()) {
-      return ResultUtil.create(ResultCodeEnum.INVALID_OPERATION);
-    }
-    apiInfo.setStatus(StatusConstant.STARTED);
-    return super.update(apiInfo);
-  }
-
-  @Override
-  public Result offline(Integer id) {
-    ApiInfo apiInfo = apiInfoDao.selectById(id);
-    if (StatusConstant.STARTED != apiInfo.getStatus()) {
-      return ResultUtil.create(ResultCodeEnum.INVALID_OPERATION);
-    }
-    apiInfo.setStatus(StatusConstant.PENDING_STARTED);
-    return super.update(apiInfo);
   }
 }

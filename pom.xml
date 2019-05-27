@@ -16,6 +16,18 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.ctrip.framework.apollo</groupId>
+      <artifactId>apollo-openapi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-parser</artifactId>
       <!-- 为了和springfox-swagger2依赖的swagger版本一致 -->
@@ -100,6 +112,11 @@
     <dependency>
       <groupId>swust-qiy</groupId>
       <artifactId>microservice-sdk-mq</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>swust-qiy</groupId>
+      <artifactId>microservice-sdk-micro-starter</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>

@@ -1,0 +1,19 @@
+qiy:
+  app:
+    name: myapplication
+  enable: true
+  service:
+    version: V1
+  system:
+    name: mysystem
+spring:
+  application:
+    name: microservice-management
+
+app:
+  id: microservice-management
+apollo:
+  meta: http://127.0.0.1:8080
+  bootstrap:
+    namespaces: V1
+    enabled: true

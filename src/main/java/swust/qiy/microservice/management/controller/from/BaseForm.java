@@ -10,14 +10,14 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "基础表单")
 public class BaseForm {
 
-  @ApiModelProperty(required = true, value = "id列表", example = "1,2,3")
-  private String ids;
+  @ApiModelProperty(required = false, value = "id列表", example = "1,2,3")
+  private Integer id;
 
-  public String getIds() {
-    return ids;
+  public Integer getId() {
+    return id;
   }
 
-  public void setIds(String ids) {
-    this.ids = ids;
+  public void setId(Integer id) {
+    this.id = id;
   }
 }

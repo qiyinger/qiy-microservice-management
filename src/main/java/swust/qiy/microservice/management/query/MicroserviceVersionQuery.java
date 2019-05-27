@@ -17,14 +17,15 @@ public class MicroserviceVersionQuery extends BaseQuery<MicroserviceVersion> {
   private Integer id;
   private List<Integer> ids;
   private String version;
-  private Integer numOfInst;
-  private Byte onlineStatus;
+  private Boolean online;
   private LocalDateTime startCreateTime;
   private LocalDateTime endCreateTime;
   private LocalDateTime createTime;
   private String description;
   private Integer microserviceId;
   private List<Integer> microserviceIds;
+  private Boolean configurated;
+  private Boolean publish;
   private Boolean isDeleted;
 
   @Override
@@ -39,11 +40,8 @@ public class MicroserviceVersionQuery extends BaseQuery<MicroserviceVersion> {
       if (!CommonUtil.isEmpty(version)) {
       queryWrapper.eq("version", version);
       }
-      if (!CommonUtil.isEmpty(numOfInst)) {
-      queryWrapper.eq("num_of_inst", numOfInst);
-      }
-      if (!CommonUtil.isEmpty(onlineStatus)) {
-      queryWrapper.eq("online_status", onlineStatus);
+      if (!CommonUtil.isEmpty(online)) {
+      queryWrapper.eq("online", online);
       }
       if (!CommonUtil.isEmpty(startCreateTime)) {
       queryWrapper.ge("create_time", startCreateTime);
@@ -62,6 +60,12 @@ public class MicroserviceVersionQuery extends BaseQuery<MicroserviceVersion> {
       }
       if (!CommonUtil.isEmpty(microserviceIds)) {
       queryWrapper.in("microservice_id", microserviceIds);
+      }
+      if (!CommonUtil.isEmpty(configurated)) {
+      queryWrapper.eq("configurated", configurated);
+      }
+      if (!CommonUtil.isEmpty(publish)) {
+      queryWrapper.eq("publish", publish);
       }
       if (!CommonUtil.isEmpty(isDeleted)) {
       queryWrapper.eq("is_deleted", isDeleted);

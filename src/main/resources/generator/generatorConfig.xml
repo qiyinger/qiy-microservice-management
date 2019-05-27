@@ -32,16 +32,6 @@
     </plugin>
     <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
       <property name="targetProject" value="./src/generator"/>
-      <property name="targetPackage" value="swust.qiy.microservice.management.mapper"/>
-      <property name="templatePath"
-        value="generator/mapperXml.ftl"/>
-      <property name="mapperSuffix" value="Mapper"/>
-      <property name="fileName" value="${tableClass.shortClassName}${mapperSuffix}.xml"/>
-    </plugin>
-
-
-    <plugin type="tk.mybatis.mapper.generator.TemplateFilePlugin">
-      <property name="targetProject" value="./src/generator"/>
       <property name="targetPackage" value="swust.qiy.microservice.management.service"/>
       <property name="templatePath"
         value="file:///Users/qiying/Documents/projects/java/design/qiy-microservice-management/src/main/resources/generator/service.ftl"/>

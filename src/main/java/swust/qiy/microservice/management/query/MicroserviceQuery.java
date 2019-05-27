@@ -17,7 +17,6 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
   private Integer id;
   private List<Integer> ids;
   private String code;
-  private String allCode;
   private String name;
   private Integer appId;
   private List<Integer> appIds;
@@ -30,6 +29,7 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
   private List<Integer> userIds;
   private Integer systemId;
   private List<Integer> systemIds;
+  private String token;
 
   @Override
   public QueryWrapper<Microservice> toQueryWrapper() {
@@ -42,9 +42,6 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
       }
       if (!CommonUtil.isEmpty(code)) {
       queryWrapper.eq("code", code);
-      }
-      if (!CommonUtil.isEmpty(allCode)) {
-      queryWrapper.eq("all_code", allCode);
       }
       if (!CommonUtil.isEmpty(name)) {
       queryWrapper.eq("name", name);
@@ -81,6 +78,9 @@ public class MicroserviceQuery extends BaseQuery<Microservice> {
       }
       if (!CommonUtil.isEmpty(systemIds)) {
       queryWrapper.in("system_id", systemIds);
+      }
+      if (!CommonUtil.isEmpty(token)) {
+      queryWrapper.eq("token", token);
       }
     return queryWrapper;
   }

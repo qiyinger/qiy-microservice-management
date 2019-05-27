@@ -3,8 +3,10 @@ package swust.qiy.microservice.management.configuration;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import swust.qiy.microservice.management.MsgSender;
 
 /**
  * @author qiying
@@ -24,5 +26,11 @@ public class MqConfiguration {
     mqProducer.start();
     log.info("RocketMq defaultProducer Started.");
     return mqProducer;
+  }
+
+  @Bean
+  @ConditionalOnBean(DefaultMQProducer.class)
+  public MsgSender msgSender(DefaultMQProducer defaultMQProducer) {
+    return new MsgSender(defaultMQProducer);
   }
 }

@@ -10,9 +10,4 @@ import swust.qiy.microservice.management.entity.ApiInfo;
 public interface ApiInfoService extends BaseService<ApiInfo> {
 
   Result<Integer> importApi(String url, Integer serviceVersionId);
-
-  Result online(Integer id);
-
-  Result offline(Integer id);
-
 }

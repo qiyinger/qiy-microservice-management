@@ -27,4 +27,7 @@ public class StrategyIpSaveForm {
   @ApiModelProperty(required = true, value = "网关id")
   private Integer gatewayId;
 
+  @ApiModelProperty(required = true, value = "路由id")
+  private Integer routeId;
+
 }

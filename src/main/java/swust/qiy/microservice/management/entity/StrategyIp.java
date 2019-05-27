@@ -32,4 +32,10 @@ public class StrategyIp {
 
   private Integer gatewayId;
 
+  /**
+   * 路由id
+   */
+  private Integer routeId;
+
+
 }

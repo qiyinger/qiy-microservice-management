@@ -13,4 +13,8 @@ public interface MicroserviceVersionService extends BaseService<MicroserviceVers
 
   Result offline(Integer versionId);
 
+  Result publish(Integer versionId);
+
+  Result unpublish(Integer versionId);
+
 }

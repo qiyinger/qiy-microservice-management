@@ -4,24 +4,19 @@ package swust.qiy.microservice.management.entity;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import java.time.LocalDateTime;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 @Data
 public class Application {
-
   /**
    * 唯一标识
    */
   private Integer id;
 
   /**
-   * 应用编号
+   * 应用编码
    */
   private String code;
-
-  /**
-   * 应用完整编码
-   */
-  private String allCode;
 
   /**
    * 应用名称
@@ -39,11 +34,6 @@ public class Application {
   private String description;
 
   /**
-   * api数量
-   */
-  private Integer apiCount;
-
-  /**
    * 所属系统标识
    */
   private Integer systemId;
@@ -55,13 +45,10 @@ public class Application {
   private Boolean isDeleted;
 
   /**
-   * 是否启用, 0:未启用 1:已启用
-   */
-  private Byte status;
-
-  /**
    * 所属用户
    */
   private Integer userId;
+
+  private String allCode;
 
 }

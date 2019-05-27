@@ -3,14 +3,10 @@ package swust.qiy.microservice.management.entity;
 
 import java.time.LocalDateTime;
 import lombok.Data;
-import swust.qiy.microservice.core.constant.StatusConstant;
 
 @Data
 public class Route {
 
-  /**
-   * 唯一标识
-   */
   private Integer id;
 
   /**
@@ -34,9 +30,9 @@ public class Route {
   private String description;
 
   /**
-   * 发布状态: 0:未发布, 1:已发布, 2:正在发布, 3: 正在停止
+   * 发布状态: 0未发布, 1:已发布, 2:正在发布, 3: 正在停止
    */
-  private Byte status = StatusConstant.PUBLISH_PENDING;
+  private Byte publish;
 
   /**
    * 所属网关标识
@@ -44,14 +40,9 @@ public class Route {
   private Integer gatewayId;
 
   /**
-   * 绑定类型
-   */
-  private Byte bindType;
-
-  /**
    * 绑定id
    */
-  private Integer bindId;
+  private Integer bindServiceId;
 
   /**
    * 路由编码
@@ -59,7 +50,7 @@ public class Route {
   private String code;
 
   /**
-   * 路由地址
+   * 路由路径
    */
   private String uri;
 

@@ -20,8 +20,6 @@ public class ApiInfoQuery extends BaseQuery<ApiInfo> {
   private String method;
   private String path;
   private String description;
-  private Byte type;
-  private Byte status;
   private Boolean invalid;
   private Integer serviceVersionId;
   private List<Integer> serviceVersionIds;
@@ -51,12 +49,6 @@ public class ApiInfoQuery extends BaseQuery<ApiInfo> {
       }
       if (!CommonUtil.isEmpty(description)) {
       queryWrapper.eq("description", description);
-      }
-      if (!CommonUtil.isEmpty(type)) {
-      queryWrapper.eq("type", type);
-      }
-      if (!CommonUtil.isEmpty(status)) {
-      queryWrapper.eq("status", status);
       }
       if (!CommonUtil.isEmpty(invalid)) {
       queryWrapper.eq("invalid", invalid);

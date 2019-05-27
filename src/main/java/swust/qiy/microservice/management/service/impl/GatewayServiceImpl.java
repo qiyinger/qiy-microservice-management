@@ -7,7 +7,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient.EurekaServiceInstance;
@@ -22,7 +21,6 @@ import swust.qiy.microservice.management.dao.GatewayDao;
 import swust.qiy.microservice.management.dao.SystemInfoDao;
 import swust.qiy.microservice.management.entity.Gateway;
 import swust.qiy.microservice.management.entity.SystemInfo;
-import swust.qiy.microservice.management.query.GatewayQuery;
 import swust.qiy.microservice.management.service.GatewayService;
 
 /**
@@ -34,9 +32,9 @@ public class GatewayServiceImpl extends BaseServiceImpl<Gateway> implements Gate
   @Resource
   private EurekaDiscoveryClient discoveryClient;
 
-  @Autowired
+  @Resource
   private SystemInfoDao systemInfoDao;
-  @Autowired
+  @Resource
   private GatewayDao gatewayDao;
 
 

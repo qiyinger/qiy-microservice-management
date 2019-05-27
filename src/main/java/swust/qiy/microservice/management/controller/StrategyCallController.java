@@ -12,13 +12,12 @@ import swust.qiy.microservice.core.enums.ResultCodeEnum;
 import swust.qiy.microservice.core.enums.TimeUnitEnum;
 import swust.qiy.microservice.core.page.PageImpl;
 import swust.qiy.microservice.core.result.Result;
+import swust.qiy.microservice.core.result.ResultAsset;
 import swust.qiy.microservice.core.result.ResultUtil;
 import swust.qiy.microservice.core.util.CommonUtil;
 import swust.qiy.microservice.management.controller.from.BaseForm;
 import swust.qiy.microservice.management.controller.from.route.strategy.StrategyCallSaveForm;
 import swust.qiy.microservice.management.controller.from.route.strategy.StrategyCallUpdateForm;
-import swust.qiy.microservice.management.dao.GatewayDao;
-import swust.qiy.microservice.management.dao.StrategyCallDao;
 import swust.qiy.microservice.management.entity.StrategyCall;
 import swust.qiy.microservice.management.query.StrategyCallQuery;
 import swust.qiy.microservice.management.service.GatewayService;
@@ -76,9 +75,7 @@ public class StrategyCallController {
   @PostMapping("/delete")
   @ResponseBody
   public Result delete(@RequestBody BaseForm form) {
-    if (CommonUtil.isEmpty(form.getIds())) {
-      return ResultUtil.create(ResultCodeEnum.PARAM_ERROR);
-    }
-    return strategyCallService.deleteByIds(form.getIds());
+    ResultAsset.notNull(form.getId(), ResultCodeEnum.PARAM_ERROR);
+    return strategyCallService.deleteById(form.getId());
   }
 }

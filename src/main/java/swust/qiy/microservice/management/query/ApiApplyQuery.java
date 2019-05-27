@@ -29,6 +29,10 @@ public class ApiApplyQuery extends BaseQuery<ApiApply> {
   private LocalDateTime startModifyTime;
   private LocalDateTime endModifyTime;
   private LocalDateTime modifyTime;
+  private Integer systemId;
+  private List<Integer> systemIds;
+  private Integer serviceVersionId;
+  private List<Integer> serviceVersionIds;
 
   @Override
   public QueryWrapper<ApiApply> toQueryWrapper() {
@@ -77,6 +81,18 @@ public class ApiApplyQuery extends BaseQuery<ApiApply> {
       }
       if (!CommonUtil.isEmpty(modifyTime)) {
       queryWrapper.eq("modify_time", modifyTime);
+      }
+      if (!CommonUtil.isEmpty(systemId)) {
+      queryWrapper.eq("system_id", systemId);
+      }
+      if (!CommonUtil.isEmpty(systemIds)) {
+      queryWrapper.in("system_id", systemIds);
+      }
+      if (!CommonUtil.isEmpty(serviceVersionId)) {
+      queryWrapper.eq("service_version_id", serviceVersionId);
+      }
+      if (!CommonUtil.isEmpty(serviceVersionIds)) {
+      queryWrapper.in("service_version_id", serviceVersionIds);
       }
     return queryWrapper;
   }

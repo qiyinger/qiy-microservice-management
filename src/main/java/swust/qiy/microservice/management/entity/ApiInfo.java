@@ -2,14 +2,10 @@ package swust.qiy.microservice.management.entity;
 
 
 import lombok.Data;
-import swust.qiy.microservice.core.constant.StatusConstant;
 
 @Data
 public class ApiInfo {
 
-  /**
-   * 唯一标识
-   */
   private Integer id;
 
   /**
@@ -38,19 +34,9 @@ public class ApiInfo {
   private String description;
 
   /**
-   * 类型:内网Intranet/外网Internet
-   */
-  private Byte type;
-
-  /**
-   * 是否发布, 0:未发布, 1:发布
-   */
-  private Byte status = StatusConstant.DISABLE;
-
-  /**
    * 是否失效, 0:有效, 1:失效
    */
-  private Boolean invalid = false;
+  private Boolean invalid;
 
   /**
    * 微服务版本标识

@@ -19,9 +19,9 @@ public class GatewayQuery extends BaseQuery<Gateway> {
   private String name;
   private String description;
   private Byte status;
-  private Byte type;
   private Integer systemId;
   private List<Integer> systemIds;
+  private String allCode;
 
   @Override
   public QueryWrapper<Gateway> toQueryWrapper() {
@@ -44,14 +44,14 @@ public class GatewayQuery extends BaseQuery<Gateway> {
       if (!CommonUtil.isEmpty(status)) {
       queryWrapper.eq("status", status);
       }
-      if (!CommonUtil.isEmpty(type)) {
-      queryWrapper.eq("type", type);
-      }
       if (!CommonUtil.isEmpty(systemId)) {
       queryWrapper.eq("system_id", systemId);
       }
       if (!CommonUtil.isEmpty(systemIds)) {
       queryWrapper.in("system_id", systemIds);
+      }
+      if (!CommonUtil.isEmpty(allCode)) {
+      queryWrapper.eq("all_code", allCode);
       }
     return queryWrapper;
   }
